@@ -1,0 +1,16 @@
+{
+  "name": "stalkee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "arelive",
+  "license": "MIT",
+  "dependencies": {
+    "serverline": "^1.5.0",
+    "telegraf": "^4.3.0",
+    "uuid": "^8.3.2"
+  }
+}
