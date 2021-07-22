@@ -1,164 +1,159 @@
-module.exports = {
-    "братва, а вот чё я еще слышал.": "AwACAgIAAxkBAAMHYNcQbumpIVEq05NmSSfvcO3q4r4AAq4DAALx7YBIy2LA5iBfvZ0gBA",
-    "хм, а на вкус ничего. только кислит. не подгнила ли?": "AwACAgIAAxkBAAMIYNcQmtXLwDDh3c_M_UlryHSXs_wAAq8DAALx7YBIuIsDfXNsHR4gBA",
-    "а ну давай, давай!": "AwACAgIAAxkBAAMJYNcQui_FUOai0aKqYslCRzPDFSgAAiIDAAPtgEhxMN2o5j6CkSAE",
-    "а ну ка помацаем, кто у нас тут?": "AwACAgIAAxkBAAMKYNcQ2uWpAAHS9ZyvqOo31q4HBabhAAIjAwAD7YBIvt3qq2BMXV4gBA",
-    "а ну, чики брики и в дамки!": "AwACAgIAAxkBAAMFYNcOt_Hbjt5f173PHcJOjuFSrwgAAiQDAAPtgEiNFg0R4FX-bSAE",
-    "а ну ка, ну ка, ну ка дайте ка я чё нить забацаю.": "AwACAgIAAxkBAAMLYNcRGDpc4efDXvz-Cmnxm65YAyYAAiUDAAPtgEjVVt6B_Zyi4iAE",
-    "а у нас в малолетке нихрена на чём играть не было.": "AwACAgIAAxkBAAMMYNcRM1PWxszOHTWYCLSQWeMCMrYAAiYDAAPtgEjcIgrJ-zj7NSAE",
-    "а, ща мы вам, арабы недоделанные!": "AwACAgIAAxkBAAMNYNcRSjJuFtRWZIJ3GOTHuB5Yxw4AAicDAAPtgEh6ByA9t-Zg0iAE",
-    "ай, мля!": "AwACAgIAAxkBAAMOYNcRYZroTk2oc-AEUFX_GfYW9MMAAigDAAPtgEjUe1monnEGSSAE",
-    "атанда!": "AwACAgIAAxkBAAMPYNcRf9VBefxaEI-DWHkd2QL-b9IAAioDAAPtgEhD9T8FuwW3eiAE",
-    "атас, пацаны!": "AwACAgIAAxkBAAMQYNcRkAnYEKdJxkbURZQy2uiQLL0AArADAALx7YBInE-wJA-n6VkgBA",
-    "эээ, бабу бы. приголубил бы любую, лишь бы всё нужное на месте было.": "AwACAgIAAxkBAAMRYNcRpiFP2FlwqYGNZNjO_MeDOdEAAisDAAPtgEh0G9MmJbWbniAE",
-    "башку оторву, сука!": "AwACAgIAAxkBAAMSYNcRvXnGYtYBjiyRHezTT6ZXIscAAiwDAAPtgEjG7rHIZJieViAE",
-    "берём его тепленького!": "AwACAgIAAxkBAAMTYNcR1pVcfn9xg5aKxl8rdhAlhoEAAi0DAAPtgEjgSrr2y-wP0yAE",
-    "мля, я маслину поймал!": "AwACAgIAAxkBAAMUYNcR7xS8J-w1Mrj-srcIjh1T6WwAAi4DAAPtgEj8lvtgQROQuiAE",
-    "братана клюнуло!": "AwACAgIAAxkBAAMVYNcSBaPs6iDHVP9-UHo-06dhRgoAAi8DAAPtgEiEwCGcZ4SMTCAE",
-    "братва, тут я один тупой, или все не поняли? это тип про чё?": "AwACAgIAAxkBAAMWYNcSGUL0AR-H-I31jbW_2NF7EpgAAjADAAPtgEjIx4nbez9urCAE",
-    "братва, выручай! ща копыта двину!": "AwACAgIAAxkBAAMXYNcSOImIRIFePDYsIfOArkv6rqcAAjEDAAPtgEhghXRIWfPs6SAE",
-    "братва, выручайте, подыхаю!": "AwACAgIAAxkBAAMYYNcSSKZ_vIbLkyFHxlTb_Wy-7l8AAjIDAAPtgEg_kksVgrmgYSAE",
-    "быстро давай!": "AwACAgIAAxkBAAMZYNcSWF0RK-ECoolo2WBar2PSrqQAArEDAALx7YBIEjipWRQ7NBMgBA",
-    "бычара, ты труп, ты понял?": "AwACAgIAAxkBAAMaYNcSavSNFYI27_J8NV5VRGDbPcMAArIDAALx7YBIGXPwGFHTDlsgBA",
-    "нету, мля, жизни, внатуре, нигде нету! в городе менты шмонают, тут солобоны гоняют!": "AwACAgIAAxkBAAOrYNclohWl6MbXfpeahDQ1glvI6mYAAjMDAAPtgEht5O-YInfe7yAE",
-    "вали актив!": "AwACAgIAAxkBAAMdYNcSuKmgL-mjHzH0wFVVXuf0rSQAAjQDAAPtgEjcC426hH42XyAE",
-    "мля, вали гадов!": "AwACAgIAAxkBAAMeYNcTM3sI7P8xEaDKeTXmYJ8chxoAAjUDAAPtgEhScLwUAv2O7SAE",
-    "вали, вали его!": "AwACAgIAAxkBAAMfYNcTQiXjwWzqPC5VGnxRI513OTYAAjYDAAPtgEiyVSPnFnW7zyAE",
-    "вали нахрен, брателло!": "AwACAgIAAxkBAAMgYNcTUswyBCdj_7HDD5vkvpcrm90AAjcDAAPtgEha-hb1JrHlyCAE",
-    "вали петушар!": "AwACAgIAAxkBAAMhYNcTZ5zguvLY9BH81Pz2Id78m8EAAjgDAAPtgEjo7a6Yri1-ViAE",
-    "валыну убрал, быстро!": "AwACAgIAAxkBAAMiYNcTicwAAUMYtoIIF-clZzCDiQvwAAKzAwAC8e2ASCu6drLa4RxhIAQ",
-    "внатуре, чистый лесоповал.": "AwACAgIAAxkBAAMjYNcToQmK7n9XTqs0CoCi2rqT-bIAAjkDAAPtgEjPh-M_tth-HCAE",
-    "вот, природа, ёпт! шмотки походу обсохнуть не успевают, ноги постоянно мокрые!": "AwACAgIAAxkBAAMkYNcTvXmJkRTwNZHg9kYyortOQaUAAjoDAAPtgEg9UbZZfzsv3iAE",
-    "всё, всё, я без валыны, всё!": "AwACAgIAAxkBAAMlYNcT1SgIJB9F7Q0WVjck-qZkNXAAArQDAALx7YBIWNAXu5WRzrEgBA",
-    "выноси бычьё!": "AwACAgIAAxkBAAMmYNcT5-55AYKo6hoM6vEkhdEiCusAArUDAALx7YBIBdMb5wUkKSggBA",
-    "выходи, полюбому найдём!": "AwACAgIAAxkBAAMnYNcT_L8TmgTL78pzSsSPn_8Zn7sAAjsDAAPtgEidIaIo_HEwtyAE",
-    "выходи по хорошему!": "AwACAgIAAxkBAAMoYNcUFDVmK9l432QB2NS9VWOXtvwAAjwDAAPtgEiYvhVCupYnDyAE",
-    "гоп стоп, мы подошли из за угла...": "AwACAgIAAxkBAAMpYNcUKYzZFqI8gzMJuUGeAvbnbqgAAj4DAAPtgEjTO2yynxZRZyAE",
-    "говори по быстрому!": "AwACAgIAAxkBAAMqYNcUOC3xU5kEo-buDGRWySfzyUgAArcDAALx7YBIVjAQRBXo71wgBA",
-    "мда, кекс, если б ты на киче так играл, давно спетушарился бы.": "AwACAgIAAxkBAAMrYNcUTt9FRHMYfwd4Uc16zftJVsIAAj8DAAPtgEgFJF2KqRCFnCAE",
-    "держись, кореш, ща всё будет пучком.": "AwACAgIAAxkBAAMsYNcUY0qnC-RsdRMkwW-5WGH4tJIAArgDAALx7YBICpw8k8u_MDggBA",
-    "лежишь, падла? правильно! собаке собачья смерть.": "AwACAgIAAxkBAAMtYNcUiagxCt_IPIl672W4SSasrhUAAkEDAAPtgEicyajE8YcmGiAE",
-    "жрать охота - писец.": "AwACAgIAAxkBAAMuYNcVJghL7M0VkbHHirL1ZdiODRgAAkIDAAPtgEhHmlNBe6vVuyAE",
-    "закопаю вас, сучьё!": "AwACAgIAAxkBAAMvYNcVOpWLux4kjSxMiSd07pJfTRoAAkMDAAPtgEh8GCW0seW69yAE",
-    "закрой хлебало!": "AwACAgIAAxkBAAMwYNcVSfRbKWWfmmkeLFsCb7YDJy0AAkQDAAPtgEiJ7aLZBH4_0SAE",
-    "ёханый бабай, заманало уже голодным бегать. хавать охота!": "AwACAgIAAxkBAAMxYNcVaPCmTXN9mSH3cP9O1UMgoS8AAkUDAAPtgEgUUe40U2yS7SAE",
-    "здарова, брат!": "AwACAgIAAxkBAAMyYNcVg-2sFd9i3JkewuvGTQ4jDLgAAkYDAAPtgEgTzjYwAyppOSAE",
-    "и какого я сюда полез? скачковал бы себе по старому на районе и всё!": "AwACAgIAAxkBAAMzYNcVl1jejAhYE6ASkRVnBlcwsxQAAkcDAAPtgEhIeejEc309hCAE",
-    "блин, иди отсюда, пока в дыню не получил!": "AwACAgIAAxkBAAM0YNcVqGbuYSlnawIAAUi9FIAScJGFAAJIAwAD7YBINbRu3_sklY4gBA",
-    "тихо, значит так!": "AwACAgIAAxkBAAM1YNcVvnxLmLGJji2SMfVqe-gHhqsAAkkDAAPtgEj9AAGO8wrc6AUgBA",
-    "как жизнь?": "AwACAgIAAxkBAAM2YNcV0H1WgCIbafY6_Fv7jTNxg_kAArkDAALx7YBIkKvDqPaNEGcgBA",
-    "кандёхай веселее!": "AwACAgIAAxkBAAM3YNcV3NvSUunhMP1EkBhQy4XuhyMAAkoDAAPtgEhf2LxsxhCYCSAE",
-    "кореш, помоги!": "AwACAgIAAxkBAAM4YNcV677YklOMdldf6qLn4oTdEMIAAroDAALx7YBIGWOKSqfyQB8gBA",
-    "хоть бы косорылых каких пошмалять, а то скукотища!": "AwACAgIAAxkBAAM5YNcV_LsKeqWRoHnkpRoAAfnr6OXVAAJLAwAD7YBIg6_swJPJZrkgBA",
-    "кранты вам всем!": "AwACAgIAAxkBAAM6YNcWDmpAHD5nlbh9Z0fpWo4BqHgAArsDAALx7YBIUsAulSl6tyMgBA",
-    "кто нибудь, помогите!": "AwACAgIAAxkBAAM7YNcWH3ACkHFzhDkRApa7wg1-83kAAkwDAAPtgEjassW7jMKC7iAE",
-    "лаванда, горная лаванда!..": "AwACAgIAAxkBAAM8YNcWUlvwEwNrv2W1Dufuii0fCEYAAk0DAAPtgEhhU-0JhxkaNSAE",
-    "лежи лежи, ща я тебя подлатаю.": "AwACAgIAAxkBAAM9YNcWYzKSSH51P2Oz-dRUNmRjeJQAAk4DAAPtgEhhISyZCz4uviAE",
-    "лови, педрила!": "AwACAgIAAxkBAAM-YNcWdSZFLPqwukfT-uWOBBDOyFUAAk8DAAPtgEhAsplcRD8NDyAE",
-    "хаха, лови пилюлю, фраер!": "AwACAgIAAxkBAAM_YNcWkK2BA7zBWHwLAiAbbJl7HA4AAlADAAPtgEggEfDMCQMo5SAE",
-    "лови отвальную, фраер!": "AwACAgIAAxkBAANAYNcWoK3lSRS2B0Obqtnqvvxis3QAAlEDAAPtgEh4jnLnB4gXMCAE",
-    "мочат нас!": "AwACAgIAAxkBAANBYNcWroEN7ehqNAK1KpzxFxsVt_gAAlIDAAPtgEhG0p2FBMu0siAE",
-    "на, козлина!": "AwACAgIAAxkBAANCYNcWvmjIY6Y8QEjgCq2y05qt7HAAAlMDAAPtgEjNUZSYStvajSAE",
-    "эй, на меня смотреть!": "AwACAgIAAxkBAANDYNcWzh_3zZ1so_LAh5PSN2TOChIAAlQDAAPtgEiCIKo5m66_VSAE",
-    "на тебе, на!": "AwACAgIAAxkBAANEYNcW46L8zxVI8hvFnScXZUV6RsgAAlUDAAPtgEjE3S68pJvw4iAE",
-    "на, хавай, сука!": "AwACAgIAAxkBAANFYNcW89YPEAABio-u9q9QMo74NUVnAAK8AwAC8e2ASNJiVvy1oBViIAQ",
-    "на, хавай!": "AwACAgIAAxkBAANGYNcXAjPeFwmNjH7NGvWRukEX0E8AAlYDAAPtgEjkNZgpzVcjzyAE",
-    "не бойся, мы тебя резать не будем.": "AwACAgIAAxkBAANHYNcXEMstzPqIOJQlBEWJpJm7Kx4AAlcDAAPtgEiS-MeoDMSpjyAE",
-    "не, братишка, я пас.": "AwACAgIAAxkBAANIYNcXIcOLcu2VO6Pu3R4EQEEgb4gAAlgDAAPtgEjNTtS6eRlpsyAE",
-    "не мандражуй, пацаны. обходим!": "AwACAgIAAxkBAANJYNcXMSuq0NvEKRHMGGiPlvZFI5YAAr0DAALx7YBIOQ2XqWPAHQ4gBA",
-    "не мешай ты... идиот!": "AwACAgIAAxkBAANKYNcXSN8aCdsSrrDu45uVBsr7PeQAAr4DAALx7YBI0L__0lCJLVsgBA",
-    "не, не, ну пацаны, подождите, я честно не понял, это типа музыка была? да манал я такую музыку!": "AwACAgIAAxkBAANLYNcXiWJ22XIl7GJjI9zaLj5oZiYAAlkDAAPtgEhXeLlQeWA2SiAE",
-    "мужик, не стреляй!": "AwACAgIAAxkBAANMYNcXndv04zD-n7Hht-wl56G6sYkAAloDAAPtgEiGr7nU3ePhlCAE",
-    "не стреляй, у меня пушки нету!": "AwACAgIAAxkBAANNYNcXut_kJVAIQifvteJPlrQhkPAAAr8DAALx7YBICrLtd20EPhMgBA",
-    "не, ну ты мужик, или нет?": "AwACAgIAAxkBAANOYNcXzaS3h2HKyJKQBBfyVaqoXbcAAlsDAAPtgEh-gXNfVDPhUSAE",
-    "не, ну я не понял?": "AwACAgIAAxkBAANPYNcX4j2mlphgiiHwYebtJF8lcXwAAlwDAAPtgEhRkYoRKh-MTSAE",
-    "ёлы палы! Не, у меня щас внатуре бэбахи с голодухи в узлы завяжутся.": "AwACAgIAAxkBAANQYNcX99py-_yTdHIk2RD3F0g0r40AAsADAALx7YBIS6Ffh0xOzK4gBA",
-    "не убивай, мужик, только не убивай!": "AwACAgIAAxkBAANRYNcYDJt00LfGPpVmwoY0VuTZdPUAAl0DAAPtgEjcmjHlLk0w3CAE",
-    "кореш, не шмаляй в меня!": "AwACAgIAAxkBAANSYNcYHPAUpnP9tkoxWZSgqX48CJUAAl4DAAPtgEjPYAJNdXE6AAEgBA",
-    "нет.": "AwACAgIAAxkBAANTYNcYPqbYzmcYYlCEalvMowh3-IAAAl8DAAPtgEis_DXDDgK2BiAE",
-    "я не при делах чисто, не надо, мужик!": "AwACAgIAAxkBAANUYNcYSV9lzO8ETo7rgw2-a17P6JQAAsEDAALx7YBInsAz0_KSD2UgBA",
-    "не не не, это не то. нифига, нет, ты гонишь.": "AwACAgIAAxkBAANVYNcYWzbpfqSSos1rSBMF6KT_CTwAAsIDAALx7YBIrc2SJJ8rfQABIAQ",
-    "ну, блин, одни идиоты кругом!": "AwACAgIAAxkBAANWYNcYb0fa8vcVaY-oFp4cYYBOBWMAAmADAAPtgEirYzwmMxIicSAE",
-    "ну давай покумекаем о делах наших скорбных.": "AwACAgIAAxkBAANXYNcYg7sHeFbmrdoAAQgqyCi6RNtyAAJhAwAD7YBI2MQXUy6ktd8gBA",
-    "ну и проголодался же я...": "AwACAgIAAxkBAANYYNcYmqQCrcEN54szoU-HyNt8JxEAAsMDAALx7YBIIT5AdxvAxg0gBA",
-    "ну, подорвали, пацаны!": "AwACAgIAAxkBAANZYNcYtFOcwKLTJDaSjdEAAdI7qj07AAJiAwAD7YBIdpog7rKnD98gBA",
-    "не, ну валына - это внатуре, конечно, прикольно. только бугор как дал, так он жешь её так и отобрать может.": "AwACAgIAAxkBAANaYNcYx026CBhHLq9Q16873gABJer7AALEAwAC8e2ASIcI6fo2mgUiIAQ",
-    "ну чё, пацаны, типа анекдот!": "AwACAgIAAxkBAANbYNcY3BnYI7OszH-eBPZMoLzHNiUAAsUDAALx7YBIL4fAsyHXbeMgBA",
-    "не, ну твою мать! не, ну нельзя же столько ничего не топтать!": "AwACAgIAAxkBAANcYNcY7X13B8qXPI8TeAV5csbgsEgAAsYDAALx7YBI-qR1SBY67scgBA",
-    "ну ты плесень, ты б еще про штирлица рассказал.": "AwACAgIAAxkBAANdYNcZAqCkp_rpurIDhSmkh7SPR7oAAmMDAAPtgEgJhqlUIAj9jyAE",
-    "ну ты, блин, и достал!": "AwACAgIAAxkBAANeYNcZEpkE-Vs_iQdfwb6EyhrY9BsAAscDAALx7YBIFIo3Fn_iXhYgBA",
-    "ну ты внатуре лох, брателло! так подставиться конкретно!": "AwACAgIAAxkBAANfYNcZISCCVbmJ1Mo47TvtUrBE23wAAmQDAAPtgEg1sB_F5KXg1CAE",
-    "ну ты чё, тупой?": "AwACAgIAAxkBAANgYNcZM-1KtiU1xF4Kw38ILgaqWccAAmUDAAPtgEjGY6tWJTx6ciAE",
-    "ныкайся - не ныкайся, мы тебя всё равно надыбаем!": "AwACAgIAAxkBAANhYNcZSJFXsV2iUBCZ4eArKNvOHKcAAsgDAALx7YBIPWigcgKYvaQgBA",
-    "опа, ливер вылез!": "AwACAgIAAxkBAANiYNcZWrpmjpwczzCSgvx-YNAkDcUAAmcDAAPtgEg4e9g9RzyYAiAE",
-    "быро, обходи, обходи эту шелупонь!": "AwACAgIAAxkBAANjYNcZcnjIIk2pTGNzChg8IoX5V-YAAskDAALx7YBIWN-L2k1YaXIgBA",
-    "ааа! не замань меня, не замань!": "AwACAgIAAxkBAANkYNcZj15xaQbLziGgLCCBEK4CWwsAAmgDAAPtgEj3GVYvetl13SAE",
-    "оп, мы тебе ща кровяночку то пустим!": "AwACAgIAAxkBAANlYNcZprvdm9GHwcIDfjlPzUvnPokAAmkDAAPtgEgrc9J2LE6M8CAE",
-    "па... па... ца.. ны...": "AwACAgIAAxkBAANmYNcZvt_bOfWc7izvmNQF6Rs7WH4AAmoDAAPtgEjoVXGP3MdbpiAE",
-    "пока я банковал, жизнь разменяна...": "AwACAgIAAxkBAANoYNcaH9G-XElUjels8LHs1Rg0Ao0AAmsDAAPtgEgO_JclcsoByyAE",
-    "отвали! нашёл время...": "AwACAgIAAxkBAANnYNcaDNJT64lFmfpg-oxhaUGmVggAAm0DAAPtgEg7Xt7w8QsiKCAE",
-    "покажись, педрила!": "AwACAgIAAxkBAANpYNcaMAZxXKMgldmBVYg4ELisW1AAAm4DAAPtgEi1EfeuiQhyBCAE",
-    "отпетушу нахрен, понял?": "AwACAgIAAxkBAANqYNcaRCuRg4PskJo_2-bsMuLoFGkAAm8DAAPtgEhO4X_-boJd6iAE",
-    "отцепись, гадина!": "AwACAgIAAxkBAANrYNcaVGkfjPjNBsU5jP6uS3zHMDwAAnADAAPtgEiYazrr9FsAASsgBA",
-    "получи, сука!": "AwACAgIAAxkBAANsYNcaYlbJuHe1f1pv-YrLmvs9sIAAAnEDAAPtgEg00gYMo4DT0iAE",
-    "помоги, брат!": "AwACAgIAAxkBAANtYNcacCZnN-NUYUtLXZizNxZvIbUAAnIDAAPtgEhMxlbwKCZTtSAE",
-    "пацанов валят!": "AwACAgIAAxkBAANuYNcaf_r7CBS0f8sU9K1VTyuMTtsAAnMDAAPtgEh2Z7To0nBHmyAE",
-    "напарить? ты меня - напарить? да я тя урою, ты понял?": "AwACAgIAAxkBAANvYNca8jTqgdVKHW9eXt4UHDPakkcAAnQDAAPtgEidoVW5sNLfGCAE",
-    "шо, не загадала? ну, как всегда...": "AwACAgIAAxkBAANwYNcbBJ-fF_QjEuH1v8L_stO0tKMAAnUDAAPtgEhME8h4eLghnSAE",
-    "достало, мля, внатуре уже всё! и понты ещё эти фраерские: \"мы типа сталкеры, мы крутые!\"": "AwACAgIAAxkBAANxYNcbIiVU5FuGclnp8tluCnuZFaMAAsoDAALx7YBID6_gNvW5eNwgBA",
-    "попали, попали, суки!": "AwACAgIAAxkBAANyYNcbPBkzM15sfCEyInfT6Uu_VqoAAssDAALx7YBI8GbIAXenXo4gBA",
-    "ну а что ты такая красивая девушка, ондако? ну а чё? иначе нельзя.": "AwACAgIAAxkBAANzYNcbV6dBF-53TJzhruo8EVtX92UAAnYDAAPtgEiGQ7XNjz4TPSAE",
-    "стой, стрелять буду!": "AwACAgIAAxkBAAN0YNcbb26OLnvDHTjxjE-jfZt5IeoAAswDAALx7YBIrYXnW4vcuE4gBA",
-    "стой!": "AwACAgIAAxkBAAN1YNcbi2cdqdh-SvdrJ2gYgjsFXu8AAngDAAPtgEj3ay3wQq-YLSAE",
-    "стоять! пристрелю, скотина!": "AwACAgIAAxkBAAN2YNcboCH6olyZSO_TwwAB_td6ViPoAAJ5AwAD7YBIlvJO0bJP6y0gBA",
-    "мля, раздавить бы щас ампулку на двоих, или к шеше какой то завалиться.": "AwACAgIAAxkBAAN3YNcbtMx7l7go2VufaZYjdVVx0XQAAnoDAAPtgEiv4toAAdAbBoUgBA",
-    "сука, я тебя ща конкретно в бушлат деревянный одену!": "AwACAgIAAxkBAAN4YNcby1ztlIT3n43hiuLF_QSF87QAAnsDAAPtgEhAbrSaOsNsAAEgBA",
-    "заходи, сбоку заходи!": "AwACAgIAAxkBAAN5YNcb3QGy00bFwUo4PyLZlXw6cdQAAnwDAAPtgEhkU7hF9frAYCAE",
-    "так тебе и надо, курва!": "AwACAgIAAxkBAAN6YNcb6sAFeB5FyvxaMn3aEQZnYF4AAn0DAAPtgEhW0Gj5gBKTDSAE",
-    "тварь!": "AwACAgIAAxkBAAN7YNcb_NLe712ClHxWncWWfsdx23gAAn4DAAPtgEgLyEq9jMshwCAE",
-    "слышь, браток?": "AwACAgIAAxkBAAN8YNccCufMT3ZXUpHjWM8YUX0xGAIAAn8DAAPtgEiiJoVkfSPZmCAE",
-    "тихо, пацаны! на цырлах...": "AwACAgIAAxkBAAN9YNccHODGdG6q9Mi-tthssAEkZjQAAoADAAPtgEhCxfFFHMPqYiAE",
-    "ты понял?": "AwACAgIAAxkBAAN-YNccLQQpMp2SNO8dDsOmiLS2Y_8AAoEDAAPtgEiglunQVNLiziAE",
-    "ты чё - баклан?": "AwACAgIAAxkBAAN_YNccRWmSIwlcRKhcFkfM5OGpJMwAAoIDAAPtgEjjs7xYbOy6LSAE",
-    "ты чё, не врубаешься? вали нахрен!": "AwACAgIAAxkBAAOAYNccWQeLJ8UbyYarU6B_c3kpLzwAAoQDAAPtgEhSBuhqvmEtfyAE",
-    "слышишь, мы тебя не тронем! внатуре за базар отвечаю!": "AwACAgIAAxkBAAOBYNcccTsDCXKD1ay56elgXMwj-tkAAoUDAAPtgEj3XN6m90DdjiAE",
-    "ты чё - дурак? пристрелю!": "AwACAgIAAxkBAAOCYNccg2J8_QZI67iuIhe2ClExVLYAAs0DAALx7YBIg307EU7D3f4gBA",
-    "слышь, фраер, щас ты у нас крякнешь!": "AwACAgIAAxkBAAODYNccnT9PrspesZVwnN9rlopQ0v4AAoYDAAPtgEiIshnwnWOkdCAE",
-    "ты чё... ты чё типа завалить меня внатуре собрался?": "AwACAgIAAxkBAAOEYNccscE48REaIDUUwEv6NT79S9QAAs4DAALx7YBIKAINI3wXRVUgBA",
-    "совсем охерел, да?": "AwACAgIAAxkBAAOFYNccx_LXip5tOugxRQRGSl2FveUAAocDAAPtgEiMS5BejEU4FiAE",
-    "ты чё, сдурел? не сейчас!": "AwACAgIAAxkBAAOGYNcc2r6mPV40QZnYplJLLcP-ggoAAogDAAPtgEiyOX0jKFf0iCAE",
-    "пацаны, у нас пораненный!": "AwACAgIAAxkBAAOHYNcc7prewbKr5Zn5xmC--4tOot8AAs8DAALx7YBIkBgTDkcWIQYgBA",
-    "свети валыны!": "AwACAgIAAxkBAAOIYNcc_eSeRVdfv_ig4V0MkaG7vFIAAokDAAPtgEgWf2pqEfTdYCAE",
-    "ты чё уставился? по шее давно не получал?": "AwACAgIAAxkBAAOJYNcdDxJcNmkH9BCSXSqt5nAnJv0AAooDAAPtgEjRxOJE7bPOGSAE",
-    "пацаны, выручайте!": "AwACAgIAAxkBAAOKYNcdI-EyP2hcFIi8PFWbrxgBnh0AAosDAAPtgEiV_hr_YfaDbiAE",
-    "тьфу! как это можно есть?": "AwACAgIAAxkBAAOLYNcdNORDEy5HfeIcS10J2sCm-UYAAowDAAPtgEh-jhsbMTjCPyAE",
-    "не брал я, не брал! век воли не видать!": "AwACAgIAAxkBAAOMYNcdSeCFKgeTklRADPpoq_kNUk4AAtADAALx7YBI5oBNLA3qQ0EgBA",
-    "вот сучара!": "AwACAgIAAxkBAAONYNcdVmMVn3w4vc1CPmTa2cZtkzsAAo0DAAPtgEjYEZeq2fyRQiAE",
-    "уберите, уберите это мурло от меня!": "AwACAgIAAxkBAAOOYNcdaLmbLIwmPcPwT4OdUv96ykgAAo4DAAPtgEgSYwhU0aVqqyAE",
-    "уроем нахрен!": "AwACAgIAAxkBAAOPYNcdeetB6OJLJS6JbVeI-b38HPUAAo8DAAPtgEiR4-4bOjvPbCAE",
-    "урою, нах, сикильдявый!": "AwACAgIAAxkBAAOQYNcdiapLP6Dgi1vZzcPHC4AWt3oAApADAAPtgEhmLJzPFr4avyAE",
-    "фраер! не боись, не тронем!": "AwACAgIAAxkBAAORYNcdn8VDtIUqZMNr5jllY3f7kE0AApEDAAPtgEgx1XBa1hIQOCAE",
-    "фраера повалили!": "AwACAgIAAxkBAAOSYNcdrU8Zntl9xsRj2tZS_iTN-tEAApIDAAPtgEiDFJVHAi_y_SAE",
-    "ха, смотрите, кто к нам колёса катит!": "AwACAgIAAxkBAAOTYNcdvT1jHW6TJlsXndhwF-30rdgAApMDAAPtgEiAKaA3-xRXkCAE",
-    "хана тебе, урод!": "AwACAgIAAxkBAAOUYNcdygW56tvqwj22jl-U0-zxZVEAApQDAAPtgEheKBF_R7XCySAE",
-    "шухер!": "AwACAgIAAxkBAAOVYNcd3KosLIamnXz4Io8Zkmp_AAFHAAKVAwAD7YBIKMsAAR9f6Ix9IAQ",
-    "о, чертыла, мля, внатуре чертыла!": "AwACAgIAAxkBAAOWYNcd9I-WzHdNlomILEjEJfJ2yAIAApYDAAPtgEiu_6KeSUlR0SAE",
-    "ща, ща я тебя вылечу...": "AwACAgIAAxkBAAOXYNceBnW3TKkAAfRs1ZXjpmD9kbM4AAKXAwAD7YBIedZenMw8bEMgBA",
-    "ахахахахах": "AwACAgIAAxkBAAOYYNceEg73DVpoI-UpWLGjwU3eQY8AAtEDAALx7YBIr_y7R8t2nPggBA",
-    "хахахахаха": "AwACAgIAAxkBAAOZYNceITWSMwdCS7v1o7p12xx_t6kAAtIDAALx7YBIA8jb0-0oJlYgBA",
-    "ща проверим чисто - помнят руки лабуха или не помнят.": "AwACAgIAAxkBAAOaYNceMqrvZxYrj7Jq-6a_zKP5slwAApgDAAPtgEjkEREagMe_zyAE",
-    "чё надо?": "AwACAgIAAxkBAAObYNceQSCWVUzIlz2Ui9a5C5ZkpTUAApkDAAPtgEiTI8QVVob5cSAE",
-    "чё, сдохла скотина?": "AwACAgIAAxkBAAOcYNcea9klDmGmMRE4tjUzF1KxjfUAApwDAAPtgEjsuJsyQ7DZ5CAE",
-    "эээ, баклан! потереть надо, выходи!": "AwACAgIAAxkBAAOeYNcetWSrMukOo3tzrb4Dr0D2EbwAAp0DAAPtgEidUtlzB-zsKyAE",
-    "эээ, внатуре за душу берёт!": "AwACAgIAAxkBAAOfYNcex3OdXh-sTuTDXc_VAuI4YZEAAp4DAAPtgEj5RfjXo-_GBCAE",
-    "эй, фраер! ты там не духарься. поймаем - долго резать будем!": "AwACAgIAAxkBAAOgYNce1hisBOn0selREayQ0tCqnngAAp8DAAPtgEjfvf6w7OU8RyAE",
-    "дружище, ты плохо понял? я не хочу с тобой разговаривать.": "AwACAgIAAxkBAAOhYNce6z9vFAABU5-S1ys2vXki9JY1AALTAwAC8e2ASOeghaT1dMTtIAQ",
-    "я тащусь, пацаны!": "AwACAgIAAxkBAAOiYNce-c0RLFEbdoeNpm1V2eFiaXsAAtQDAALx7YBIA1YJSr9cHNMgBA",
-    "а хахахахаха": "AwACAgIAAxkBAAOjYNcfDgh80L0CcXUNPixK-rQaXlwAAqADAAPtgEhF8Get2hbufyAE",
-    "ну ты дал, чертыла! мля, внатуре, ха, я отвечаю!": "AwACAgIAAxkBAAOkYNcfHif2EjWhiuvIYhLYFNPefF8AAqEDAAPtgEgFdiEVObmOYSAE",
-    "ну ты чисто комик, ну ты ваще!": "AwACAgIAAxkBAAOlYNcfL9NidSK4hTg3f7CqEaqxjegAAtUDAALx7YBIoYZ7O8n2c2cgBA",
-    "херачь их, пацаны!": "AwACAgIAAxkBAAOmYNcfSFldcJCL6BnlTb4OScb1TT8AAqIDAAPtgEhcpTQyqBMHFiAE",
-    "хаха. смешно, прям не могу.": "AwACAgIAAxkBAAOnYNcfbvUZ0TPub0L5XVzEzagISwMAAqMDAAPtgEgJi1RlWI-fwCAE",
-    "чувак, да ты запарил!": "AwACAgIAAxkBAAOoYNcfgYXLRg1EeqPeBbuvKoT44NQAAtYDAALx7YBIMaj_GX8KebEgBA",
-    "а вот щас - для души!": "AwACAgIAAxkBAAOpYNcfudrZg47FI2O6np4fhG7SzkAAAqsDAAPtgEgEhKzfdawMeiAE"
-};
+const pg = require("pg");
+
+const config = require("./config");
+
+class DBHelper
+{
+    constructor()
+    {
+        this.pool = null;
+    }
+
+    async start()
+    {
+        this.pool = new pg.Pool({
+            host:     config.db.host,
+            user:     config.db.user,
+            password: config.db.password,
+            database: config.db.database,
+            port:     config.db.port,
+            max:      1
+        });
+
+        this.pool.on("error", async (err, client) => {
+            console.error("PostgreSQL pool is down!", err);
+            await this.pool.end();
+            process.exit(-1);
+        });
+
+        await this.pool.query(`
+            create table if not exists voices (
+                id serial not null primary key,
+                "character" varchar(255) not null,
+                fileid varchar(128) not null unique,
+                file_uid varchar(32) not null unique,
+                quote text not null,
+                n_uses bigint not null default 0
+            )`);
+
+        await this.pool.query(`
+            create table if not exists words (
+                id serial not null primary key,
+                voice_id int not null references voices (id),
+                word varchar(255) not null
+            )`);
+    }
+
+    async stop()
+    {
+        await this.pool.end();
+    }
+
+    async restart()
+    {
+        await this.stop();
+        await this.start();
+    }
+
+    async addQuote(character, fileid, fileUid, quote)
+    {
+        quote = quote.trim();
+
+        let id = await this.pool.query(`
+                insert into voices ("character", fileid, file_uid, quote)
+                values ($1, $2, $3, $4)
+                returning id
+            `, [
+                character, fileid, fileUid, quote
+            ]);
+
+        id = id.rows[0].id;
+
+        let words = quote
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+            .split(/\s+/g);
+
+        for (let word of words) {
+            await this.pool.query(`
+                    insert into words (voice_id, word)
+                    values ($1, $2)
+                `, [
+                    id, word.toLowerCase()
+                ]);
+        }
+
+        return id;
+    }
+
+    async remQuote(fileUid)
+    {
+        await this.pool.query(`
+                delete from voices
+                where file_uid = $1
+            `, [
+                fileUid
+            ]);
+    }
+
+    async useQuote(fileUid)
+    {
+        await this.pool.query(`
+                update voices
+                set n_uses = n_uses + 1
+                where file_uid = $1
+            `, [
+                fileUid
+            ]);
+    }
+
+    async getAllVoices(limit)
+    {
+        let voices = await this.pool.query(`
+                select fileid, file_uid, "character", quote, n_uses
+                from voices
+                order by n_uses desc
+                limit $1
+            `, [
+                limit
+            ]);
+
+        return voices.rows;
+    }
+
+    async getVoicesByWords(words, limit)
+    {
+        let params = [];
+
+        for (let i = 1; i <= words.length; i++) {
+            params.push('$' + i);
+        }
+
+        let voices = await this.pool.query(`
+                select fileid, file_uid, "character", quote, n_uses
+                from voices v
+                join words w on w.voice_id = v.id
+                where w.word in (${params.join(',')})
+                order by n_uses desc
+                limit ${limit}
+            `, words);
+
+        return voices.rows;
+    }
+
+    async getVoicesBySub(sub, limit)
+    {
+        let voices = await this.pool.query(`
+                select fileid, file_uid, "character", quote, n_uses
+                from voices
+                where quote like '%' || $1 || '%'
+                order by n_uses desc
+                limit $2
+            `, [
+                sub, limit
+            ]);
+
+        return voices.rows;
+    }
+}
+
+module.exports = new DBHelper();

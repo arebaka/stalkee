@@ -4,7 +4,8 @@ const fs   = require("fs");
 const { Telegraf }   = require("telegraf");
 const { v4: uuidv4 } = require("uuid");
 
-const db = require("./db");
+const db     = require("./db");
+const config = require("./config");
 
 
 
@@ -14,11 +15,10 @@ class Bot
     constructor(token, username)
     {
         this.token    = token;
-        this.username = username;
+        this.username = null;
+        this.greeting = fs.readFileSync(path.resolve("greeting"), "utf8");
 
         this.bot = new Telegraf(this.token);
-
-        this.greeting = fs.readFileSync(path.resolve("greeting"), "utf8");
 
         this.bot.use(async (ctx, next) => {
             await next();
@@ -28,59 +28,91 @@ class Bot
             ctx.replyWithMarkdown(this.greeting);
         });
 
-        this.bot.on("message", ctx => {
-            if (ctx.from.username == "arelive")
-                console.log(ctx.message);
+        this.bot.command("add", async ctx => {
+            const replyTo = ctx.message.reply_to_message;
+
+            if (ctx.from.id == config.admin.id
+                && replyTo && replyTo.voice
+            ) {
+                const lines     = ctx.message.text.split('\n');
+                const character = lines[0].split(' ')
+                    .slice(1).join(' ');
+                const quote     = lines
+                    .splice(1).join('\n');
+
+                if (!character || !quote)
+                    return;
+
+                try {
+                    await db.addQuote(
+                        character, replyTo.voice.file_id, replyTo.voice.file_unique_id, quote
+                    );
+                }
+                catch (err) {
+                    console.error(err);
+                    return ctx.replyWithMarkdown("Походу не вышло, братан!");
+                }
+
+                ctx.replyWithMarkdown("Хахахахах, ну ты чертыла, мля, внатуре, чертыла!");
+            }
         });
 
-        this.bot.on("inline_query", ctx => {
+        this.bot.command("remove", async ctx => {
+            if (ctx.from.id == config.admin.id
+                && ctx.message.reply_to_message
+                && ctx.message.reply_to_message.voice
+            ) {
+                await db.remQuote(ctx.message.reply_to_message.voice.file_unique_id);
+            }
+        });
+
+        this.bot.on("inline_query", async ctx => {
             let query = ctx.inlineQuery.query
-                .trim().toLowerCase().split(/\s+/).join(' ');
-            let res    = [];
-            let titles = [];
+                .trim().split(/\s+/).join(' ');
+            let voices;
 
-            if (query.startsWith("\"") && query.endsWith("\"")) {
-                query  = query.substring(1, query.length - 1);
-                titles = Object.keys(db).filter(title => title.includes(query));
-
-                for (let title of titles) {
-                    res.push({
-                        type:          "voice",
-                        id:            uuidv4(),
-                        voice_file_id: db[title],
-                        title:         title
-                    });
-                }
+            if (!query) {
+                voices = await db.getAllVoices(config.responseLimit);
+            }
+            else if (query.length > 1 && query.startsWith('"') && query.endsWith('"')) {
+                voices = await db.getVoicesBySub(
+                    query.substring(1, query.length - 1), config.responseLimit
+                );
             }
             else {
-                query  = query.split(' ');
-                titles = Object.keys(db).filter(title => query.every(word => title.includes(word)));
-
-                for (let title of titles) {
-                    res.push({
-                        type:          "voice",
-                        id:            uuidv4(),
-                        voice_file_id: db[title],
-                        title:         title
-                    });
-                }
+                voices = await db.getVoicesByWords(
+                    query.split(' '), config.responseLimit
+                );
             }
 
-            res = res.slice(0, 20);
+            ctx.answerInlineQuery(voices.map(voice => ({
+                type:          "voice",
+                id:            `${voice.file_uid}.${uuidv4()}`,
+                voice_file_id: voice.fileid,
+                title:         voice.quote
+            })));
+        });
 
-            ctx.answerInlineQuery(res);
+        this.bot.on("chosen_inline_result", async ctx => {
+            const fileUid = ctx.update.chosen_inline_result.result_id.split('.')[0];
+
+            await db.useQuote(fileUid);
         });
     }
 
     async start()
     {
+        await db.start();
+
         this.bot
-            .launch()
+            .launch(config.params)
             .then(res => {
+                this.username = this.bot.botInfo.username;
                 console.log(`Bot @${this.username} started.`);
             })
             .catch(err => {
                 console.error(err);
+                this.bot.stop();
             });
     }
 
@@ -89,6 +121,7 @@ class Bot
         console.log(`Stop the bot @${this.username}`);
 
         this.bot.stop();
+        await db.stop();
     }
 
     async reload()
@@ -99,5 +132,8 @@ class Bot
         await this.start();
     }
 }
+
+
+
 
 module.exports = Bot;

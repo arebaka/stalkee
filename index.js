@@ -10,7 +10,7 @@ const config = require("./config");
     process.stdin.setEncoding("utf8");
     process.stderr.setEncoding("utf8");
     
-    const bot = new Bot(config.token, config.username);
+    const bot = new Bot(config.token);
     
     rl.init();
     rl.setCompletion(["stop", "reload"]);
@@ -39,9 +39,6 @@ const config = require("./config");
                 : rl.output.write("\x1B[1K> ")
             );
     });
-    
-    
-    
-    
+
     await bot.start();    
 })();
