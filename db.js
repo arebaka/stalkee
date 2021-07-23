@@ -27,6 +27,14 @@ class DBHelper
         });
 
         await this.pool.query(`
+            create table if not exists users (
+                id bigint not null primary key,
+                username varchar(32) default null,
+                first_name varchar(256) not null,
+                last_name varchar(256) default null
+            )`);
+
+        await this.pool.query(`
             create table if not exists voices (
                 id serial not null primary key,
                 "character" varchar(255) not null,
@@ -53,6 +61,17 @@ class DBHelper
     {
         await this.stop();
         await this.start();
+    }
+
+    async updateUser(id, username, firstName, lastName)
+    {
+        await this.pool.query(`
+                insert into users (id, username, first_name, last_name)
+                values ($1, $2, $3, $4)
+                on conflict (id) do update set username = $2, first_name = $3, last_name = $4
+            `, [
+                id, username, firstName, lastName
+            ]);
     }
 
     async addQuote(character, fileid, fileUid, quote)
@@ -129,7 +148,7 @@ class DBHelper
         }
 
         let voices = await this.pool.query(`
-                select fileid, file_uid, "character", quote, n_uses
+                select distinct fileid, file_uid, "character", quote, n_uses
                 from voices v
                 join words w on w.voice_id = v.id
                 where w.word in (${params.join(',')})
@@ -143,7 +162,7 @@ class DBHelper
     async getVoicesBySub(sub, limit)
     {
         let voices = await this.pool.query(`
-                select fileid, file_uid, "character", quote, n_uses
+                select distinct fileid, file_uid, "character", quote, n_uses
                 from voices
                 where quote like '%' || $1 || '%'
                 order by n_uses desc
