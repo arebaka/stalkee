@@ -11,5 +11,6 @@ module.exports = {
         database: process.env.DBDATABASE,
         port:     process.env.DBPORT     || 5432
     },
-    responseLimit: process.env.RESPONSE_LIMIT || 20
+    responseLimit: process.env.RESPONSE_LIMIT || 20,
+    musicFileId: process.env.MUSIC_FILEID
 };

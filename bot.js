@@ -93,6 +93,10 @@ class Bot
             ctx.replyWithMarkdown(anecdot);
         });
 
+        this.bot.command("music", async ctx => {
+            ctx.replyWithAudio(config.musicFileId);
+        });
+
         this.bot.on("inline_query", async ctx => {
             let query = ctx.inlineQuery.query
                 .trim().split(/\s+/).join(' ');
