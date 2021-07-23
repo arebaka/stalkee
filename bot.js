@@ -70,6 +70,29 @@ class Bot
             }
         });
 
+        this.bot.command("addanecdot", async ctx => {
+            if (ctx.from.id == config.admin.id) {
+                const anecdot = ctx.message.text
+                    .split('\n').slice(1).join('\n');
+
+                try {
+                    await db.addAnecdot(anecdot);
+                }
+                catch (err) {
+                    console.error(err);
+                    return ctx.replyWithMarkdown("Походу не вышло, братан!");
+                }
+
+                ctx.replyWithMarkdown("Хахахахах, ну ты чертыла, мля, внатуре, чертыла!");
+            }
+        });
+
+        this.bot.command("anecdot", async ctx => {
+            const anecdot = await db.getRandomAnecdot();
+
+            ctx.replyWithMarkdown(anecdot);
+        });
+
         this.bot.on("inline_query", async ctx => {
             let query = ctx.inlineQuery.query
                 .trim().split(/\s+/).join(' ');

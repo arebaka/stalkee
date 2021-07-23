@@ -35,6 +35,12 @@ class DBHelper
             )`);
 
         await this.pool.query(`
+            create table if not exists anecdots (
+                id serial not null primary key,
+                text text not null
+            )`);
+
+        await this.pool.query(`
             create table if not exists voices (
                 id serial not null primary key,
                 "character" varchar(255) not null,
@@ -71,6 +77,16 @@ class DBHelper
                 on conflict (id) do update set username = $2, first_name = $3, last_name = $4
             `, [
                 id, username, firstName, lastName
+            ]);
+    }
+
+    async addAnecdot(anecdot)
+    {
+        await this.pool.query(`
+                insert into anecdots (text)
+                values ($1)
+            `, [
+                anecdot
             ]);
     }
 
@@ -123,6 +139,17 @@ class DBHelper
             `, [
                 fileUid
             ]);
+    }
+
+    async getRandomAnecdot()
+    {
+        let anecdot = await this.pool.query(`
+                select text from anecdots
+                order by random()
+                limit 1
+            `);
+
+        return anecdot.rows[0].text;
     }
 
     async getAllVoices(limit)
