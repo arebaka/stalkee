@@ -21,11 +21,20 @@ class Bot
         this.bot = new Telegraf(this.token);
 
         this.bot.use(async (ctx, next) => {
-            await db.updateUser(
-                ctx.from.id, ctx.from.username, ctx.from.first_name, ctx.from.last_name
-            );
+            try {
+                await db.updateUser(
+                    ctx.from.id, ctx.from.username, ctx.from.first_name, ctx.from.last_name
+                );
+                await db.updateChat(
+                    ctx.chat.id, ctx.chat.username, ctx.chat.title
+                );
 
-            await next();
+                await next();
+            }
+            catch (err) {
+                console.error(err);
+                ctx.replyWithMarkdown("Что то пошло не так!");
+            }
         });
 
         this.bot.start(ctx => {

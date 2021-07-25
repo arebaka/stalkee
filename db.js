@@ -35,6 +35,14 @@ class DBHelper
             )`);
 
         await this.pool.query(`
+            create table if not exists chats (
+                id bigint not null primary key,
+                username varchar(32) default null,
+                title varchar(255) not null,
+                last_trigger_number int not null default 0
+            )`);
+
+        await this.pool.query(`
             create table if not exists anecdots (
                 id serial not null primary key,
                 text text not null
@@ -74,9 +82,23 @@ class DBHelper
         await this.pool.query(`
                 insert into users (id, username, first_name, last_name)
                 values ($1, $2, $3, $4)
-                on conflict (id) do update set username = $2, first_name = $3, last_name = $4
+                on conflict (id) do update set
+                username = $2, first_name = $3, last_name = $4
             `, [
                 id, username, firstName, lastName
+            ]);
+    }
+
+    async updateChat(id, username, title)
+    {
+        await this.pool.query(`
+                insert into chats (id, username, title)
+                values ($1, $2, $3)
+                on conflict (id) do update set
+                username = $2
+                title = $3
+            `, [
+                id, username, title
             ]);
     }
 

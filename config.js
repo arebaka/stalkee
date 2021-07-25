@@ -1,5 +1,5 @@
 module.exports = {
-    token: process.env.TOKEN,
+    token:  process.env.TOKEN,
     params: {},
     admin: {
         id: process.env.ADMIN_ID
@@ -12,5 +12,5 @@ module.exports = {
         port:     process.env.DBPORT     || 5432
     },
     responseLimit: process.env.RESPONSE_LIMIT || 20,
-    musicFileId: process.env.MUSIC_FILEID
+    musicFileId:   process.env.MUSIC_FILEID
 };
