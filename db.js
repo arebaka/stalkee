@@ -38,8 +38,7 @@ class DBHelper
             create table if not exists chats (
                 id bigint not null primary key,
                 username varchar(32) default null,
-                title varchar(255) not null,
-                last_trigger_number int not null default 0
+                title varchar(255) not null
             )`);
 
         await this.pool.query(`
@@ -95,8 +94,7 @@ class DBHelper
                 insert into chats (id, username, title)
                 values ($1, $2, $3)
                 on conflict (id) do update set
-                username = $2
-                title = $3
+                username = $2, title = $3
             `, [
                 id, username, title
             ]);

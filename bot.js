@@ -25,9 +25,12 @@ class Bot
                 await db.updateUser(
                     ctx.from.id, ctx.from.username, ctx.from.first_name, ctx.from.last_name
                 );
-                await db.updateChat(
-                    ctx.chat.id, ctx.chat.username, ctx.chat.title
-                );
+
+                if (ctx.chat && ctx.chat.type != "private") {
+                    await db.updateChat(
+                        ctx.chat.id, ctx.chat.username, ctx.chat.title
+                    );
+                }
 
                 await next();
             }
