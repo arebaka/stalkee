@@ -17,8 +17,7 @@ class Bot
         this.token    = token;
         this.username = null;
         this.greeting = fs.readFileSync(path.resolve("greeting"), "utf8");
-
-        this.bot = new Telegraf(this.token);
+        this.bot      = new Telegraf(this.token);
 
         this.bot.use(async (ctx, next) => {
             try {
