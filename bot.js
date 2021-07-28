@@ -105,7 +105,8 @@ class Bot
         });
 
         this.bot.command("music", async ctx => {
-            ctx.replyWithAudio(config.musicFileId);
+            if (config.musicFileId)
+                return ctx.replyWithAudio(config.musicFileId);
         });
 
         this.bot.on("inline_query", async ctx => {
