@@ -1,13 +1,38 @@
 {
-  "name": "stalkee",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@arelive/stalkee",
+  "version": "1.0.2",
+  "description": "a Telegram bot who can send voice messages via inline mode added by admin and sort them by numbers of uses",
+  "bin": "./start.sh",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "arelive",
+  "author": {
+    "name": "arelive",
+    "email": "me@are.moe",
+    "url": "https://are.moe"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://git.sode.su/arelive/stalkee"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "stalkee",
+    "stalker",
+    "inline",
+    "voice"
+  ],
+  "files": [
+    "start.sh",
+    "index.js",
+    "config.js",
+    "bot.js",
+    "db.js",
+    "greeting"
+  ],
   "dependencies": {
     "pg": "^8.6.0",
     "serverline": "^1.5.0",
