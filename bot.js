@@ -47,7 +47,7 @@ class Bot
             const replyTo = ctx.message.reply_to_message;
 
             if (ctx.from.id == config.admin.id
-                && replyTo && replyTo.voice
+                && replyTo && (replyTo.voice || replyTo.audio)
             ) {
                 const lines     = ctx.message.text.split('\n');
                 const character = lines[0].split(' ')
@@ -57,10 +57,13 @@ class Bot
 
                 if (!character || !quote)
                     return;
+                if (replyTo.voice) {
+                    replyTo.audio = replyTo.voice;
+                }
 
                 try {
                     await db.addQuote(
-                        character, replyTo.voice.file_id, replyTo.voice.file_unique_id, quote
+                        character, replyTo.audio.file_id, replyTo.audio.file_unique_id, quote
                     );
                 }
                 catch (err) {
