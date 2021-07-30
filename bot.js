@@ -82,10 +82,10 @@ class Bot
         });
 
         this.bot.command("addanecdot", async ctx => {
-            if (ctx.from.id == config.admin.id) {
-                const anecdot = ctx.message.text
-                    .split('\n').slice(1).join('\n');
+            const anecdot = ctx.message.text
+                .split('\n').slice(1).join('\n');
 
+            if (anecdot && ctx.from.id == config.admin.id) {
                 try {
                     await db.addAnecdot(anecdot);
                 }
