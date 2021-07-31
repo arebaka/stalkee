@@ -60,7 +60,9 @@ class DBHelper
         await this.pool.query(`
             create table if not exists words (
                 id serial not null primary key,
-                voice_id int not null references voices (id),
+                voice_id int not null
+                    references voices (id)
+                    on delete cascade on update cascade,
                 word varchar(255) not null
             )`);
     }
@@ -199,6 +201,8 @@ class DBHelper
                 from voices v
                 join words w on w.voice_id = v.id
                 where w.word in (${params.join(',')})
+                group by v.id
+                having count (distinct w.word) = ${params.length}
                 order by n_uses desc
                 limit ${limit}
             `, words);
