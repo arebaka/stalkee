@@ -108,8 +108,20 @@ class Bot
         });
 
         this.bot.command("music", async ctx => {
-            if (config.musicFileId)
-                return ctx.replyWithAudio(config.musicFileId);
+            const fileid = fs.readFileSync(path.resolve("music_fileid"), "utf8");
+            if (!fileid)
+                return ctx.replyWithMarkdown("Чё то настроения нет играть совсем.");
+
+            ctx.replyWithAudio(fileid);
+        });
+
+        this.bot.command("setmusic", async ctx => {
+            const replyTo = ctx.message.reply_to_message;
+            if (!replyTo || !replyTo.audio)
+                return ctx.replyWithMarkdown("Походу не вышло, братан!");
+
+            fs.writeFileSync(path.resolve("music_fileid"), replyTo.audio.file_id);
+            ctx.replyWithMarkdown("Да, душевно!");
         });
 
         this.bot.on("inline_query", async ctx => {
