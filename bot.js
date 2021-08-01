@@ -45,34 +45,26 @@ class Bot
 
         this.bot.command("add", async ctx => {
             const replyTo = ctx.message.reply_to_message;
+            const lines     = ctx.message.text.split('\n');
+            const character = lines[0].split(' ')
+                .slice(1).join(' ');
+            const quote     = lines
+                .splice(1).join('\n');
 
-            if (ctx.from.id == config.admin.id
-                && replyTo && (replyTo.voice || replyTo.audio)
-            ) {
-                const lines     = ctx.message.text.split('\n');
-                const character = lines[0].split(' ')
-                    .slice(1).join(' ');
-                const quote     = lines
-                    .splice(1).join('\n');
+            if (ctx.from.id != config.admin.id || replyTo || !replyTo.voice || !character || !quote)
+                return;
 
-                if (!character || !quote)
-                    return;
-                if (replyTo.voice) {
-                    replyTo.audio = replyTo.voice;
-                }
-
-                try {
-                    await db.addQuote(
-                        character, replyTo.audio.file_id, replyTo.audio.file_unique_id, quote
-                    );
-                }
-                catch (err) {
-                    console.error(err);
-                    return ctx.replyWithMarkdown("Походу не вышло, братан!");
-                }
-
-                ctx.replyWithMarkdown("Хахахахах, ну ты чертыла, мля, внатуре, чертыла!");
+            try {
+                await db.addQuote(
+                    character, replyTo.audio.file_id, replyTo.audio.file_unique_id, quote
+                );
             }
+            catch (err) {
+                console.error(err);
+                return ctx.replyWithMarkdown("Походу не вышло, братан!");
+            }
+
+            ctx.replyWithMarkdown("Хахахахах, ну ты чертыла, мля, внатуре, чертыла!");
         });
 
         this.bot.command("remove", async ctx => {
@@ -81,6 +73,8 @@ class Bot
                 && ctx.message.reply_to_message.voice
             ) {
                 await db.remQuote(ctx.message.reply_to_message.voice.file_unique_id);
+
+                ctx.replyWithMarkdown("Ну, проветришься - заходи!");
             }
         });
 
@@ -88,40 +82,69 @@ class Bot
             const anecdot = ctx.message.text
                 .split('\n').slice(1).join('\n');
 
-            if (anecdot && ctx.from.id == config.admin.id) {
-                try {
-                    await db.addAnecdot(anecdot);
-                }
-                catch (err) {
-                    console.error(err);
-                    return ctx.replyWithMarkdown("Походу не вышло, братан!");
-                }
+            if (!anecdot || !anecdot.length || ctx.from.id != config.admin.id)
+                return;
 
-                ctx.replyWithMarkdown("Хахахахах, ну ты чертыла, мля, внатуре, чертыла!");
+            try {
+                await db.addAnecdot(anecdot);
             }
+            catch (err) {
+                console.error(err);
+                return ctx.replyWithMarkdown("Походу не вышло, братан!");
+            }
+
+            ctx.replyWithMarkdown("Хахахахах, ну ты выдал!");
         });
 
         this.bot.command("anecdot", async ctx => {
             const anecdot = await db.getRandomAnecdot();
 
-            ctx.replyWithMarkdown(anecdot);
+            anecdot
+                ? ctx.replyWithMarkdown(anecdot)
+                : ctx.replyWithMarkdown("Больше ничего не знаю.");
         });
 
         this.bot.command("music", async ctx => {
             const fileid = fs.readFileSync(path.resolve("music_fileid"), "utf8");
-            if (!fileid)
-                return ctx.replyWithMarkdown("Чё то настроения нет играть совсем.");
 
-            ctx.replyWithAudio(fileid);
+            fileid
+                ? ctx.replyWithAudio(fileid)
+                : ctx.replyWithMarkdown("Чё то настроения нет играть совсем.");
         });
 
         this.bot.command("setmusic", async ctx => {
             const replyTo = ctx.message.reply_to_message;
-            if (!replyTo || !replyTo.audio)
-                return ctx.replyWithMarkdown("Походу не вышло, братан!");
+
+            if (ctx.from.id != config.admin.id || !replyTo || !replyTo.audio)
+                return;
 
             fs.writeFileSync(path.resolve("music_fileid"), replyTo.audio.file_id);
             ctx.replyWithMarkdown("Да, душевно!");
+        });
+
+        this.bot.command("story", async ctx => {
+            const fileid = await db.getRandomStory();
+
+            fileid
+                ? ctx.replyWithVoice(fileid)
+                : ctx.replyWithMarkdown("Больше ничего не знаю.");
+        });
+
+        this.bot.command("addstory", async ctx => {
+            const replyTo = ctx.message.reply_to_message;
+
+            if (ctx.from.id != config.admin.id || !replyTo || !replyTo.voice)
+                return;
+
+            try {
+                await db.addStory(replyTo.voice.file_id);
+            }
+            catch (err) {
+                console.error(err);
+                return ctx.replyWithMarkdown("Походу не вышло, братан!");
+            }
+
+            ctx.replyWithMarkdown("Хахахахах, ну ты чертыла, мля, внатуре, чертыла!");
         });
 
         this.bot.on("inline_query", async ctx => {

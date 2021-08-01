@@ -48,6 +48,12 @@ class DBHelper
             )`);
 
         await this.pool.query(`
+            create table if not exists stories (
+                id serial not null primary key,
+                fileid varchar(128) not null unique
+            )`);
+
+        await this.pool.query(`
             create table if not exists voices (
                 id serial not null primary key,
                 "character" varchar(255) not null,
@@ -112,6 +118,16 @@ class DBHelper
             ]);
     }
 
+    async addStory(fileid)
+    {
+        await this.pool.query(`
+                insert into stories (fileid)
+                values ($1)
+            `, [
+                fileid
+            ]);
+    }
+
     async addQuote(character, fileid, fileUid, quote)
     {
         quote = quote.trim();
@@ -171,7 +187,20 @@ class DBHelper
                 limit 1
             `);
 
-        return anecdot.rows[0].text;
+        return anecdot.rows[0]
+            ? anecdot.rows[0].text : null;
+    }
+
+    async getRandomStory()
+    {
+        let story = await this.pool.query(`
+                select fileid from stories
+                order by random()
+                limit 1
+            `);
+
+        return story.rows[0]
+            ? story.rows[0].fileid : null;
     }
 
     async getAllVoices(limit)
