@@ -1,6 +1,8 @@
-const pg = require("pg");
+const path = require("path");
+const fs   = require("fs");
+const pg   = require("pg");
 
-const config = require("./config");
+const config = require("../config");
 
 class DBHelper
 {
@@ -11,13 +13,10 @@ class DBHelper
 
     async start()
     {
+        const sql = fs.readFileSync(path.resolve("db/init.sql"), "utf8").split(';');
         this.pool = new pg.Pool({
-            host:     config.db.host,
-            user:     config.db.user,
-            password: config.db.password,
-            database: config.db.database,
-            port:     config.db.port,
-            max:      1
+            connectionString: config.dbUri,
+            max:              1
         });
 
         this.pool.on("error", async (err, client) => {
@@ -26,51 +25,10 @@ class DBHelper
             process.exit(-1);
         });
 
-        await this.pool.query(`
-            create table if not exists users (
-                id bigint not null primary key,
-                username varchar(32) default null,
-                first_name varchar(256) not null,
-                last_name varchar(256) default null
-            )`);
-
-        await this.pool.query(`
-            create table if not exists chats (
-                id bigint not null primary key,
-                username varchar(32) default null,
-                title varchar(255) not null
-            )`);
-
-        await this.pool.query(`
-            create table if not exists anecdots (
-                id serial not null primary key,
-                text text not null
-            )`);
-
-        await this.pool.query(`
-            create table if not exists stories (
-                id serial not null primary key,
-                fileid varchar(128) not null unique
-            )`);
-
-        await this.pool.query(`
-            create table if not exists voices (
-                id serial not null primary key,
-                "character" varchar(255) not null,
-                fileid varchar(128) not null unique,
-                file_uid varchar(32) not null unique,
-                quote text not null,
-                n_uses bigint not null default 0
-            )`);
-
-        await this.pool.query(`
-            create table if not exists words (
-                id serial not null primary key,
-                voice_id int not null
-                    references voices (id)
-                    on delete cascade on update cascade,
-                word varchar(255) not null
-            )`);
+        for (let query of sql) {
+            await this.pool.query(query)
+                .catch(err => {});
+        }
     }
 
     async stop()
@@ -89,8 +47,8 @@ class DBHelper
         await this.pool.query(`
                 insert into users (id, username, first_name, last_name)
                 values ($1, $2, $3, $4)
-                on conflict (id) do update set
-                username = $2, first_name = $3, last_name = $4
+                on conflict (id) do update
+                set username = $2, first_name = $3, last_name = $4
             `, [
                 id, username, firstName, lastName
             ]);
@@ -101,8 +59,8 @@ class DBHelper
         await this.pool.query(`
                 insert into chats (id, username, title)
                 values ($1, $2, $3)
-                on conflict (id) do update set
-                username = $2, title = $3
+                on conflict (id) do update
+                set username = $2, title = $3
             `, [
                 id, username, title
             ]);
@@ -110,22 +68,24 @@ class DBHelper
 
     async addAnecdot(anecdot)
     {
-        await this.pool.query(`
+        const id = await this.pool.query(`
                 insert into anecdots (text)
                 values ($1)
-            `, [
-                anecdot
-            ]);
+                returning id
+            `, [anecdot]);
+
+        return id.rows[0].id;
     }
 
     async addStory(fileid)
     {
-        await this.pool.query(`
+        const id = await this.pool.query(`
                 insert into stories (fileid)
                 values ($1)
-            `, [
-                fileid
-            ]);
+                returning id
+            `, [fileid]);
+
+        return id.rows[0].id;
     }
 
     async addQuote(character, fileid, fileUid, quote)
@@ -160,23 +120,25 @@ class DBHelper
 
     async remQuote(fileUid)
     {
-        await this.pool.query(`
+        const id = await this.pool.query(`
                 delete from voices
                 where file_uid = $1
-            `, [
-                fileUid
-            ]);
+                returning id
+            `, [fileUid]);
+
+        return id.rows[0].id;
     }
 
     async useQuote(fileUid)
     {
-        await this.pool.query(`
+        const id = await this.pool.query(`
                 update voices
                 set n_uses = n_uses + 1
                 where file_uid = $1
-            `, [
-                fileUid
-            ]);
+                returning id
+            `, [fileUid]);
+
+        return id.rows[0].id;
     }
 
     async getRandomAnecdot()
@@ -210,9 +172,7 @@ class DBHelper
                 from voices
                 order by n_uses desc
                 limit $1
-            `, [
-                limit
-            ]);
+            `, [limit]);
 
         return voices.rows;
     }
@@ -228,7 +188,8 @@ class DBHelper
         let voices = await this.pool.query(`
                 select distinct fileid, file_uid, "character", quote, n_uses
                 from voices v
-                join words w on w.voice_id = v.id
+                join words w
+                on w.voice_id = v.id
                 where w.word in (${params.join(',')})
                 group by v.id
                 having count (distinct w.word) = ${params.length}

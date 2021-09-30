@@ -44,14 +44,14 @@ class Bot
         });
 
         this.bot.command("add", async ctx => {
-            const replyTo = ctx.message.reply_to_message;
+            const replyTo   = ctx.message.reply_to_message;
             const lines     = ctx.message.text.split('\n');
             const character = lines[0].split(' ')
                 .slice(1).join(' ');
             const quote     = lines
                 .splice(1).join('\n');
 
-            if (ctx.from.id != config.admin.id || replyTo || !replyTo.voice || !character || !quote)
+            if (ctx.from.id != config.admin.id || !replyTo || !replyTo.voice || !character || !quote)
                 return;
 
             try {
@@ -155,9 +155,13 @@ class Bot
             if (!query) {
                 voices = await db.getAllVoices(config.responseLimit);
             }
-            else if (query.length > 1 && query.startsWith('"') && query.endsWith('"')) {
+            else if (query.length > 1
+                && query.startsWith('"')
+                && query.endsWith('"')
+            ) {
                 voices = await db.getVoicesBySub(
-                    query.substring(1, query.length - 1), config.responseLimit
+                    query.substring(1, query.length - 1),
+                    config.responseLimit
                 );
             }
             else {
