@@ -1,0 +1,9 @@
+[bot]
+token = ""
+admin_id = 0
+response_limit = 50
+
+[db]
+uri = "postgres://localhost/stalkee"
+
+[params]
