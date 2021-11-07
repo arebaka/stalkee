@@ -25,11 +25,8 @@ class Bot
                     ctx.from.id, ctx.from.username, ctx.from.first_name, ctx.from.last_name
                 );
 
-                if (ctx.chat && ctx.chat.type != "private") {
-                    await db.updateChat(
-                        ctx.chat.id, ctx.chat.username, ctx.chat.title
-                    );
-                }
+                ctx.chat && ctx.chat.type != "private"
+                    ? await db.updateChat(ctx.chat.id, ctx.chat.username, ctx.chat.title) : null;
 
                 await next();
             }

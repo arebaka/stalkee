@@ -149,7 +149,7 @@ class DBHelper
                 limit 1
             `);
 
-        return anecdot.rows[0]
+        return anecdot.rows.length
             ? anecdot.rows[0].text : null;
     }
 
@@ -161,7 +161,7 @@ class DBHelper
                 limit 1
             `);
 
-        return story.rows[0]
+        return story.rows.length
             ? story.rows[0].fileid : null;
     }
 
