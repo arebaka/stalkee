@@ -6,6 +6,12 @@
 \+ истории  
 \+ музыкальная пауза
 
+![](https://img.shields.io/tokei/lines/github/arebaka/stalkee)
+![](https://img.shields.io/github/repo-size/arebaka/stalkee)
+![](https://img.shields.io/npm/v/stalkee)
+
+![](https://img.shields.io/badge/Russian-100%25-brightgreen)
+
 ![тут должен быть скриншот инлайн запроса, но куда то делся](https://user-images.githubusercontent.com/36796676/127343858-474b275f-ab45-4a23-9c96-b118f4d389d1.png)
 
 ## Команды

@@ -1,8 +1,8 @@
 const path = require("path");
 const fs   = require("fs");
 
-const { Telegraf }   = require("telegraf");
-const { v4: uuidv4 } = require("uuid");
+const Telegraf = require("telegraf").Telegraf;
+const uuidv4   = require("uuid").v4;
 
 const db     = require("./db");
 const config = require("./config");
@@ -12,7 +12,7 @@ const config = require("./config");
 
 class Bot
 {
-    constructor(token, username)
+    constructor(token)
     {
         this.token    = token;
         this.username = null;

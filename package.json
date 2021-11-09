@@ -1,6 +1,6 @@
 {
   "name": "stalkee",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin and sort them by numbers of uses",
   "bin": "./start.sh",
   "main": "index.js",
@@ -35,10 +35,9 @@
     "index.js",
     "config.js",
     "bot.js",
-    "db/index.js",
-    "db/init.sql",
     "greeting",
-    "music_fileid"
+    "music_fileid",
+    "db/*"
   ],
   "dependencies": {
     "pg": "^8.6.0",
