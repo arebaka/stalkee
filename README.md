@@ -9,6 +9,7 @@
 ![](https://img.shields.io/tokei/lines/github/arebaka/stalkee)
 ![](https://img.shields.io/github/repo-size/arebaka/stalkee)
 ![](https://img.shields.io/npm/v/stalkee)
+![](https://img.shields.io/codefactor/grade/github/arebaka/stalkee)
 
 ![](https://img.shields.io/badge/Russian-100%25-brightgreen)
 
