@@ -30,10 +30,10 @@
 2. Установи [PostgreSQL](//www.postgresql.org/download/), если не стоит
 3. Создай в PSQL пустую базу данных 'stalkee' с доступом от своего юзера
 4. Установи [npm](//www.npmjs.com) и [node.js](//npmjs.com/package/node)
-5. `npm i @arelive/stalkee`
+5. `npm i stalkee`
 6. `export TOKEN=<ТОКЕН_ОТ_BOTFATHER>`
 7. `export ADMIN_ID=<ТВОЙ_TELEGRAM_ID>` (узнать [тут](//t.me/myidbot))
-8. `npx @arelive/stalkee`
+8. `npx stalkee`
 9. Кидай своему боту голосовые и отвечай на них одиночными сообщениями в таком формате:
 > `/add <ПЕРСОНАЖ>`  
 > `<РЕПЛИКА>`
@@ -52,7 +52,7 @@
 
 ## Установка
 ```bash
-npm i @arelive/stalkee
+npm i stalkee
 ```
 
 ## Запуск
@@ -66,12 +66,12 @@ npm i @arelive/stalkee
 
 После задания окружения выполни
 ```bash
-npx @arelive/stalkee
+npx stalkee
 ```
 
 Если всё прошло успешно, ты увидишь в консоли что то вроде этого:
 ```
-> @arelive/stalkee@1.2.0 start
+> stalkee@1.2.0 start
 > node index.js
 
 Bot @stalkeeBot started.

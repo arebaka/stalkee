@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd node_modules/@arelive/stalkee
+cd node_modules/stalkee
 npm start

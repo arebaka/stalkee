@@ -6,11 +6,12 @@ const uuidv4   = require("uuid").v4;
 
 const db     = require("./db");
 const config = require("./config");
+const logger = require("./logger");
 
 
 
 
-class Bot
+module.exports = class Bot
 {
     constructor(token)
     {
@@ -31,7 +32,7 @@ class Bot
                 await next();
             }
             catch (err) {
-                console.error(err);
+                logger.error(err);
                 ctx.replyWithMarkdown("Что то пошло не так!");
             }
         });
@@ -57,7 +58,7 @@ class Bot
                 );
             }
             catch (err) {
-                console.error(err);
+                logger.error(err);
                 return ctx.replyWithMarkdown("Походу не вышло, братан!");
             }
 
@@ -86,7 +87,7 @@ class Bot
                 await db.addAnecdot(anecdot);
             }
             catch (err) {
-                console.error(err);
+                logger.error(err);
                 return ctx.replyWithMarkdown("Походу не вышло, братан!");
             }
 
@@ -137,7 +138,7 @@ class Bot
                 await db.addStory(replyTo.voice.file_id);
             }
             catch (err) {
-                console.error(err);
+                logger.error(err);
                 return ctx.replyWithMarkdown("Походу не вышло, братан!");
             }
 
@@ -190,32 +191,29 @@ class Bot
             .launch(config.params)
             .then(res => {
                 this.username = this.bot.botInfo.username;
-                console.log(`Bot @${this.username} started.`);
+                logger.info(`Bot @${this.username} started.`);
             })
             .catch(err => {
-                console.error(err);
-                this.bot.stop();
+                logger.error(err);
             });
     }
 
     async stop()
     {
-        console.log(`Stop the bot @${this.username}`);
+        logger.info(`Stop the bot @${this.username}`);
 
-        this.bot.stop();
+        await this.bot.stop();
         await db.stop();
+
+        process.exit(0);
     }
 
     async reload()
     {
-        console.log(`Reload the bot @${this.username}`);
+        logger.info(`Reload the bot @${this.username}`);
 
-        await this.stop();
+        await this.bot.stop();
+		await db.stop();
         await this.start();
     }
 }
-
-
-
-
-module.exports = Bot;
