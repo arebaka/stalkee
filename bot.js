@@ -213,7 +213,7 @@ module.exports = class Bot
         logger.info(`Reload the bot @${this.username}`);
 
         await this.bot.stop();
-		await db.stop();
+        await db.stop();
         await this.start();
     }
 }
