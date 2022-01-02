@@ -1,38 +1,38 @@
 CREATE TABLE IF NOT EXISTS public.chats (
-    id bigint NOT NULL PRIMARY KEY,
-    username character varying(32) DEFAULT NULL::character varying,
-    title character varying(255) NOT NULL
+	id bigint NOT NULL PRIMARY KEY,
+	username character varying(32) DEFAULT NULL::character varying,
+	title character varying(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.users (
-    id bigint NOT NULL PRIMARY KEY,
-    username character varying(32) DEFAULT NULL::character varying,
-    first_name character varying(256) NOT NULL,
-    last_name character varying(256) DEFAULT NULL::character varying
+	id bigint NOT NULL PRIMARY KEY,
+	username character varying(32) DEFAULT NULL::character varying,
+	first_name character varying(256) NOT NULL,
+	last_name character varying(256) DEFAULT NULL::character varying
 );
 
 CREATE TABLE IF NOT EXISTS public.anecdots (
-    id serial NOT NULL PRIMARY KEY,
-    text text NOT NULL
+	id serial NOT NULL PRIMARY KEY,
+	text text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.stories (
-    id serial NOT NULL PRIMARY KEY,
-    fileid character varying(128) NOT NULL
+	id serial NOT NULL PRIMARY KEY,
+	fileid character varying(128) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS public.voices (
-    id serial NOT NULL PRIMARY KEY,
-    "character" character varying(255) NOT NULL,
-    fileid character varying(128),
-    file_uid character varying(32),
-    quote text,
-    n_uses bigint DEFAULT 0
+	id serial NOT NULL PRIMARY KEY,
+	"character" character varying(255) NOT NULL,
+	fileid character varying(128),
+	file_uid character varying(32),
+	quote text,
+	n_uses bigint DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS public.words (
-    id serial NOT NULL PRIMARY KEY,
-    voice_id integer NOT NULL,
-    word character varying(255) NOT NULL
+	id serial NOT NULL PRIMARY KEY,
+	voice_id integer NOT NULL,
+	word character varying(255) NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS stories_fileid_uindex  ON public.stories USING btree (fileid);
