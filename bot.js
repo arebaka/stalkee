@@ -54,7 +54,7 @@ module.exports = class Bot
 
 			try {
 				await db.addQuote(
-					character, replyTo.audio.file_id, replyTo.audio.file_unique_id, quote
+					character, replyTo.voice.file_id, replyTo.voice.file_unique_id, quote
 				);
 			}
 			catch (err) {
