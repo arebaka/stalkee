@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS public.stories (
 	id serial NOT NULL PRIMARY KEY,
 	fileid character varying(128) NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS public.voices (
 	id serial NOT NULL PRIMARY KEY,
 	"character" character varying(255) NOT NULL,

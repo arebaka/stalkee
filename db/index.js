@@ -16,7 +16,7 @@ class DBHelper
 	{
 		const sql = fs.readFileSync(path.resolve("db/init.sql"), "utf8").split(';');
 		this.pool = new pg.Pool({
-			connectionString: config.dbUri,
+			connectionString: config.db.uri,
 			max:              1
 		});
 

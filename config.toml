@@ -1,9 +1,10 @@
 [bot]
-token = ""
-admin_id = 0
-response_limit = 50
+token  = ""
+admins = []
+params = {}
 
 [db]
 uri = "postgres://localhost/stalkee"
 
-[params]
+[limits]
+max_result_size = 50
