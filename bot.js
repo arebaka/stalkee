@@ -5,6 +5,7 @@ const db     = require("./db");
 const config = require("./config");
 const logger = require("./logger");
 
+const filters     = require("./filters");
 const middlewares = require("./middlewares");
 const commands    = require("./commands");
 const handlers    = require("./handlers");
@@ -21,14 +22,16 @@ module.exports = class Bot
 
 		this.bot.start(commands.start);
 
-		this.bot.command("add",        middlewares.voice, commands.add);
-		this.bot.command("remove",     middlewares.voice, commands.remove);
-		this.bot.command("addstory",   middlewares.voice, commands.addstory);
-		this.bot.command("story",      commands.story);
-		this.bot.command("addanecdot", middlewares.admin, commands.addanecdot);
-		this.bot.command("anecdot",    commands.anecdot);
-		this.bot.command("setmusic",   middlewares.admin, commands.setmusic);
-		this.bot.command("music",      commands.music);
+		this.bot.command("anecdot", commands.anecdot);
+		this.bot.command("story",   commands.story);
+		this.bot.command("music",   commands.music);
+
+		this.bot.command("addanecdot", filters.admin, commands.addanecdot);
+		this.bot.command("setmusic",   filters.admin, commands.setmusic);
+
+		this.bot.command("add",      filters.admin, filters.voice, commands.add);
+		this.bot.command("remove",   filters.admin, filters.voice, commands.remove);
+		this.bot.command("addstory", filters.admin, filters.voice, commands.addstory);
 
 		this.bot.on("inline_query",         handlers.inline_query);
 		this.bot.on("chosen_inline_result", handlers.chosen_inline_result);
