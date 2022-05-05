@@ -1,2 +1,11 @@
+#folders
 node_modules
+dist
+
+#files
 package-lock.json
+.env
+
+#temporary
+*.log
+*~

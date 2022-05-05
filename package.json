@@ -1,13 +1,18 @@
 {
   "name": "stalkee",
-  "version": "1.6.1",
-  "description": "a Telegram bot who can send voice messages via inline mode added by admin and sort them by numbers of uses",
+  "version": "2.0.0",
+  "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
   "bin": "./start.sh",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "homepage": "https://t.me/stalkeeBot",
   "scripts": {
     "test": ":",
-    "start": "node index.js"
+    "lint": "eslint .",
+    "build": "tsc",
+    "prepare": "npm run --silent build",
+    "prestart": "npm run build",
+    "start": "cd dist; node index.js"
   },
   "bugs": {
     "url": "https://github.com/arebaka/stalkee/issues"
@@ -28,11 +33,23 @@
     "voice"
   ],
   "dependencies": {
-    "@arelive/logger": "^1.1.2",
+    "@arelive/logger": "^2.0.0",
     "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13",
     "serverline": "^1.5.0",
-    "telegraf": "^4.7.0",
+    "telegraf": "^3.39.0",
     "toml": "^3.0.0",
-    "uuid": "^8.3.2"
+    "typegram": "^3.9.1",
+    "typeorm": "^0.3.6",
+    "uuid": "^8.3.2",
+    "yaml": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.24",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.14.0",
+    "typescript": "^4.6.3"
   }
 }

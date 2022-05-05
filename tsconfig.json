@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true
+  },
+  "include": ["src"]
+}

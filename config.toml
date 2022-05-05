@@ -1,7 +1,8 @@
 [bot]
-token  = ""
-admins = []
-params = {}
+token   = ""
+admins  = []
+options = {}
+locales = ["eng", "rus"]
 
 [db]
 uri = "postgres://localhost/stalkee"

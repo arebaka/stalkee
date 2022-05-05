@@ -1,25 +1,24 @@
 #folders
 node_modules
-src
+dist
 
 #files
 package-lock.json
-.env
+start.sh
+LICENSE
+README*
 
 #git
 .git
 .github
-
-#docker
-Dockerfile
-docker-compose.yml
 
 #dotfiles
 .gitkeep
 .gitignore
 .gitattributes
 .gitmodules
-.dockerignore
+.npmignore
+.editorconfig
 
 #temporary
 *.log
