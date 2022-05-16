@@ -2,10 +2,9 @@ import 'reflect-metadata'
 
 import { DataSource } from 'typeorm'
 
-import { config, logger, readline } from './util'
+import { config, logger, readline } from './utils'
 import { Bot } from './bot'
 import { User, Audio, Word } from './models'
-
 
 
 
@@ -48,7 +47,6 @@ async function setMode(args:string[]): Promise<void> {
 
 
 
-
 const bot = new Bot(config.bot.token)
 
 const db = new DataSource({
@@ -58,9 +56,6 @@ const db = new DataSource({
 	logging: false,
 	entities: [User, Audio, Word]
 })
-
-
-
 
 readline.init()
 

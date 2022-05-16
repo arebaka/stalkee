@@ -1,10 +1,10 @@
 import { Middleware } from 'telegraf'
 import { InlineQueryResultCachedDocument } from 'typegram'
-import { FindManyOptions, In, Like } from 'typeorm'
+import { FindManyOptions, Like } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Context } from '../../types'
-import { config, logger } from '../../util'
+import { config, logger } from '../../utils'
 import { Audio } from '../../models'
 
 function audioToQueryResult(audio:Audio): InlineQueryResultCachedDocument {
@@ -34,7 +34,7 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 			audios = await Audio.find({
 				...options,
 				where: {
-					quote: Like(`%${query}%`)  //FIXME
+					quote: Like(`%${query.slice(1, -1)}%`)
 				}
 			})
 		}
@@ -43,15 +43,27 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 
 			audios = await Audio.find({
 				...options,
-				where: {
-					words: { word: In(words) }
-				},
+				take: null,
 				relations: {
 					words: true
 				}
 			})
 
-			audios = audios.filter(audio => audio.words.every(word => words.includes(word.word)))
+			for (const audio of audios) {
+				const audioWords = audio.words.map(word => word.word)
+
+				for (const word of words) {
+					const pos = audioWords.indexOf(word)
+
+					if (pos < 0) {
+						ctx.answerInlineQuery(null)
+						return
+					}
+
+					audioWords.splice(pos, 1)
+					audio.words.splice(pos, 1)
+				}
+			}
 		}
 
 		ctx.answerInlineQuery(audios.map(audioToQueryResult), { cache_time: 30 })

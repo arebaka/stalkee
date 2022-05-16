@@ -1,5 +1,5 @@
 import type { Context } from '../../types'
-import { config, logger } from '../../util'
+import { config, logger } from '../../utils'
 
 export function admin(ctx:Context): boolean {
 	if (ctx.from != null && config.bot.admins.includes(ctx.from.id))

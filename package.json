@@ -1,6 +1,6 @@
 {
   "name": "stalkee",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
   "bin": "./start.sh",
   "main": "dist/index.js",
@@ -34,6 +34,7 @@
   ],
   "dependencies": {
     "@arelive/logger": "^2.0.0",
+    "dotenv": "^16.0.1",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "serverline": "^1.5.0",

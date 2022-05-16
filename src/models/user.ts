@@ -1,29 +1,29 @@
 import {
 	BaseEntity,
 	Column,
-	CreateDateColumn,
 	Entity,
-	PrimaryColumn
+	PrimaryColumn,
+	UpdateDateColumn
 } from 'typeorm'
 
 @Entity('users')
 export class User extends BaseEntity {
 
-	@PrimaryColumn({ type: 'bigint', unique: true })
+	@PrimaryColumn('bigint')
 	id:number
 
-	@Column({ length: 32, nullable: true })
+	@Column({ nullable: true, length: 32 })
 	username:string
 
 	@Column({ name: 'first_name', length: 64 })
 	firstName:string
 
-	@Column({ name: 'last_name', length: 64, nullable: true })
+	@Column({ name: 'last_name', nullable: true, length: 64 })
 	lastName:string
 
-	@Column({ length: 3, default: 'eng' })
+	@Column('character', { default: 'eng', length: 3 })
 	language:string
 
-	@CreateDateColumn({ name: 'updated_at' })
+	@UpdateDateColumn({ name: 'updated_at' })
 	updatedAt:Date
 }

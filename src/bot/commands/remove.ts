@@ -1,7 +1,7 @@
 import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
-import { logger } from '../../util'
+import { logger } from '../../utils'
 import { Audio } from '../../models'
 
 export const remove:Middleware<Context> = async ctx => {
@@ -13,7 +13,8 @@ export const remove:Middleware<Context> = async ctx => {
 				fileUid: mess.voice.file_unique_id
 			})
 
-			audio.remove()  //FIXME: process - MissingDeleteDateColumnError: Entity "Audio" does not have delete date columns.
+			await audio.remove()
+
 			ctx.reply(ctx.t.commands.remove.res.ok, Extra.HTML())
 			logger.info(`removed ${audio.fileUid}`, 'command.remove')
 		}

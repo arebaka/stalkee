@@ -1,7 +1,7 @@
 import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
-import { logger } from '../../util'
+import { logger } from '../../utils'
 import { Audio, Word } from '../../models'
 import * as markups from '../markups'
 
@@ -25,8 +25,9 @@ export const add:Middleware<Context> = async ctx => {
 		try {
 			await audio.save()
 
-			ctx.reply(ctx.t.commands.add.res.ok, Extra.HTML().markup(
-				markups.removeAfterAdd(ctx, { fileUid: audio.fileUid })))
+			ctx.reply(ctx.t.commands.add.res.ok, Extra
+				.HTML()
+				.markup(markups.removeAfterAdd(ctx, { fileUid: audio.fileUid })))
 
 			logger.info(`added ${audio.fileUid}`, 'command.add')
 		}

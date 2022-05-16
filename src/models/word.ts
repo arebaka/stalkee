@@ -4,7 +4,6 @@ import {
 	Entity,
 	Index,
 	ManyToOne,
-	PrimaryColumnCannotBeNullableError,
 	PrimaryGeneratedColumn
 } from 'typeorm'
 
@@ -14,12 +13,12 @@ import { Audio } from './audio'
 export class Word extends BaseEntity {
 
 	@PrimaryGeneratedColumn()
-	id:PrimaryColumnCannotBeNullableError
+	id:number
 
-	@ManyToOne(() => Audio, audio => audio.words, { nullable: false })
+	@ManyToOne(() => Audio, audio => audio.words, { nullable: false, onDelete: 'CASCADE' })
 	audio:Audio
 
-	@Column()
 	@Index()
+	@Column()
 	word:string
 }

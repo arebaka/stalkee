@@ -1,25 +1,32 @@
-#folders
-node_modules
+# Logs
+logs/
+*.log
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build
 dist
 
-#files
-package-lock.json
-start.sh
-LICENSE
-README*
-
-#git
+# Git
 .git
-.github
-
-#dotfiles
 .gitkeep
 .gitignore
 .gitattributes
 .gitmodules
+.cache
+
+# Dotfiles
 .npmignore
 .editorconfig
+.github
 
-#temporary
-*.log
-*~
+# License and readme
+LICENSE
+README*

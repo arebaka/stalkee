@@ -1,7 +1,7 @@
 import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
-import { config, i18n, logger } from '../../util'
+import { config, i18n, logger } from '../../utils'
 import { User } from '../../models'
 import * as markups from '../markups'
 

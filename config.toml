@@ -8,4 +8,4 @@ locales = ["eng", "rus"]
 uri = "postgres://localhost/stalkee"
 
 [limits]
-max_result_size = 50
+max_result_size = 50  # dont set > 50

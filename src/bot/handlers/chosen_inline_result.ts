@@ -1,7 +1,7 @@
 import { Middleware } from 'telegraf'
 
 import { Context } from '../../types'
-import { logger } from '../../util'
+import { logger } from '../../utils'
 import { Audio } from '../../models'
 
 export const chosenInlineResult:Middleware<Context> = async ctx => {
@@ -11,7 +11,7 @@ export const chosenInlineResult:Middleware<Context> = async ctx => {
 		})
 
 		audio.nUses++
-		audio.save()
+		await audio.save()
 	}
 	catch (err) {
 		logger.error(''+err, 'handler.chosen_inline_result')

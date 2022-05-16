@@ -1,7 +1,7 @@
 import { Middleware } from 'telegraf'
 
 import { Context } from '../../types'
-import { i18n, logger } from '../../util'
+import { i18n, logger } from '../../utils'
 import { User } from '../../models'
 
 export const setLocale:Middleware<Context> = async (ctx, next) => {
