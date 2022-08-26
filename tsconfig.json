@@ -10,8 +10,8 @@
     "declarationDir": "dist",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-	"emitDecoratorMetadata": true,
-	"experimentalDecorators": true
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["src"]
 }

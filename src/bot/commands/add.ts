@@ -14,7 +14,6 @@ export const add:Middleware<Context> = async ctx => {
 
 		audio.fileId   = mess.voice.file_id
 		audio.fileUid  = mess.voice.file_unique_id
-		audio.duration = mess.voice.duration
 		audio.quote    = quote
 
 		audio.words = quote

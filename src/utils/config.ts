@@ -26,13 +26,13 @@ class Config {
 	limits:ILimits
 }
 
-dotenv.config({ path: path.resolve('../.env'), override: false })
+dotenv.config({ override: false })
 
 const raw:string = fs.readFileSync(path.resolve('../config.toml'), 'utf-8')
 const config:Config = toml.parse(raw)
 
-config.bot.token = process.env.BOT_TOKEN    || config.bot.token
-config.db.uri    = process.env.DATABASE_URI || config.db.uri
+config.bot.token = process.env.BOT_TOKEN || config.bot.token
+config.db.uri = process.env.DB_URI || config.db.uri
 
 config.bot.admins = process.env.BOT_ADMINS
 	? process.env.BOT_ADMINS.split(/\s/g).map(id => +id)

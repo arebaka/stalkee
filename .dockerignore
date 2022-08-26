@@ -11,9 +11,6 @@ logs/
 node_modules/
 jspm_packages/
 
-# Build
-dist
-
 # Git
 .git
 .gitkeep
@@ -30,3 +27,6 @@ dist
 # License and readme
 LICENSE
 README*
+
+# Build
+dist

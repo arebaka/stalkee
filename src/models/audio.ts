@@ -22,9 +22,6 @@ export class Audio extends BaseEntity {
 	@Column({ name: 'file_uid', unique: true, length: 32 })
 	fileUid:string
 
-	@Column({ unsigned: true })
-	duration:number
-
 	@Index({ fulltext: true })
 	@Column()
 	quote:string
