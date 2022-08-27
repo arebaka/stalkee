@@ -49,27 +49,28 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 				}
 			})
 
-			for (const audio of audios) {
-				const audioWords = audio.words.map(word => word.word)
+			for (const word of words) {
+				for (let i = 0; i < audios.length; i++) {
+					let index = audios[i].words.map(w => w.word).indexOf(word)
 
-				for (const word of words) {
-					const pos = audioWords.indexOf(word)
-
-					if (pos < 0) {
-						ctx.answerInlineQuery(null)
-						return
+					if (index < 0) {
+						audios.splice(i--, 1)
+					} else {
+						audios[i].words.splice(index, 1)
 					}
-
-					audioWords.splice(pos, 1)
-					audio.words.splice(pos, 1)
 				}
 			}
+
+			audios.splice(config.limits.max_result_size)
 		}
 
-		ctx.answerInlineQuery(audios.map(audioToQueryResult), { cache_time: 30 })
+		ctx.answerInlineQuery(
+			audios.length ? audios.map(audioToQueryResult) : null, {  // TODO: replace null with payload
+				cache_time: 30
+		})
 	}
 	catch (err) {
 		logger.error(''+err, 'handler.inline_query')
-		ctx.answerInlineQuery([], { cache_time: 30 })
+		ctx.answerInlineQuery(null, { cache_time: 30 })
 	}
 }
