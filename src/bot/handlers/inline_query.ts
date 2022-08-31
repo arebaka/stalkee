@@ -12,7 +12,7 @@ function audioToQueryResult(audio:Audio): InlineQueryResultCachedDocument {
 		type: 'document',
 		id: `${audio.fileUid}.${uuidv4()}`,
 		title: audio.quote,
-		description: ''+audio.nUses,
+		description: `${audio.actor || ''}${audio.location ? ' ◆︎ '+audio.location : ''}\n▶ ${audio.nUses}`,
 		document_file_id: audio.fileId
 	}
 }
@@ -65,12 +65,12 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 		}
 
 		ctx.answerInlineQuery(
-			audios.length ? audios.map(audioToQueryResult) : null, {  // TODO: replace null with payload
+			audios.length ? audios.map(audioToQueryResult) : null, {
 				cache_time: 30
 		})
 	}
 	catch (err) {
-		logger.error(''+err, 'handler.inline_query')
+		logger.error(err, 'handler.inline_query')
 		ctx.answerInlineQuery(null, { cache_time: 30 })
 	}
 }

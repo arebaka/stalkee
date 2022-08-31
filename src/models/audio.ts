@@ -26,6 +26,14 @@ export class Audio extends BaseEntity {
 	@Column()
 	quote:string
 
+	@Index()
+	@Column({ nullable: true })
+	actor:string
+
+	@Index()
+	@Column({ nullable: true })
+	location:string
+
 	@CreateDateColumn({ name: 'added_at' })
 	addedAt:Date
 
