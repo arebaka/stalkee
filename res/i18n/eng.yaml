@@ -1,5 +1,5 @@
 ---
-language: Английский
+language: English
 name: Stalkee
 
 common:
@@ -35,7 +35,7 @@ markups:
 actions:
   lang:
     res:
-      invalid_lang: invalid language!
+      invalid_lang: Invalid language!
   remove:
     res:
       ok: Показалось, наверное...

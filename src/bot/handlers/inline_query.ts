@@ -12,7 +12,7 @@ function audioToQueryResult(audio:Audio): InlineQueryResultCachedDocument {
 		type: 'document',
 		id: `${audio.fileUid}.${uuidv4()}`,
 		title: audio.quote,
-		description: `${audio.actor || ''}${audio.location ? ' ◆︎ '+audio.location : ''}\n▶ ${audio.nUses}`,
+		description: `${audio.actor || ''}${audio.location ? ' ◆︎ '+audio.location : ''}\n▷ ${audio.nUses}`,
 		document_file_id: audio.fileId
 	}
 }
