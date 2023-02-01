@@ -6,30 +6,30 @@ import dotenv from 'dotenv'
 import { LaunchOptions } from '../types'
 
 interface IBot {
-	token:string
-	admins:number[]
-	options:LaunchOptions
-	locales:string[]
+	token: string
+	admins: number[]
+	options: LaunchOptions
+	locales: string[]
 }
 
 interface IDB {
-	uri:string
+	uri: string
 }
 
 interface ILimits {
-	max_result_size:number
+	max_result_size: number
 }
 
 class Config {
-	bot:IBot
-	db:IDB
-	limits:ILimits
+	bot: IBot
+	db: IDB
+	limits: ILimits
 }
 
 dotenv.config({ override: false })
 
-const raw:string = fs.readFileSync(path.resolve('../config.toml'), 'utf-8')
-const config:Config = toml.parse(raw)
+const raw: string = fs.readFileSync(path.resolve('../config.toml'), 'utf-8')
+const config: Config = toml.parse(raw)
 
 config.bot.token = process.env.BOT_TOKEN || config.bot.token
 config.db.uri = process.env.DB_URI || config.db.uri

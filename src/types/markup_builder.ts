@@ -3,8 +3,9 @@ import { InlineKeyboardMarkup } from 'typegram'
 
 import { Context } from './context'
 
-type Options = {[key:string]: string}
+type Options = {[key: string]: string}
 
-export type markupBuilder = (
-	ctx?:Context, options?:Options
+export type MarkupBuilder = (
+	ctx: Context,
+	options?: Options,
 ) => Markup<InlineKeyboardMarkup> & InlineKeyboardMarkup

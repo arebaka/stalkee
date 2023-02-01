@@ -4,7 +4,10 @@ import { Context } from '../../types'
 import { i18n, logger } from '../../utils'
 import { User } from '../../models'
 
-export const setLocale:Middleware<Context> = async (ctx, next) => {
+export const setLocale: Middleware<Context> = async (ctx, next) => {
+	if (!ctx.from)
+		return next()
+
 	try {
 		const user = await User.findOneByOrFail({ id: ctx.from.id })
 		ctx.t = i18n[user.language]

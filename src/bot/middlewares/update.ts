@@ -6,21 +6,28 @@ import { User } from '../../models'
 
 const DEFAULT_LANG = config.bot.locales[0]
 
-export const update:Middleware<Context> = async (ctx, next) => {
-	let user = await User.findOneBy({ id: ctx.from.id })
+export const update: Middleware<Context> = async (ctx, next) => {
+	if (!ctx.from)
+		return next()
 
-	if (!user) {
-		user = new User()
-		user.id = ctx.from.id
-		user.language = DEFAULT_LANG
+	try {
+		let user = await User.findOneBy({ id: ctx.from.id })
+
+		if (!user) {
+			user = new User()
+			user.id = ctx.from.id
+			user.language = DEFAULT_LANG
+		}
+
+		user.username = ctx.from.username || ''
+		user.firstName = ctx.from.first_name
+		user.lastName = ctx.from.last_name || ''
+		user.updatedAt = new Date()
+
+		await user.save()
+		next()
 	}
-
-	user.username  = ctx.from.username
-	user.firstName = ctx.from.first_name
-	user.lastName  = ctx.from.last_name
-	user.updatedAt = new Date()
-
-	await user.save()
-		.then(() => next())
-		.catch(err => logger.error(''+err, 'middleware.update'))
+	catch (err) {
+		logger.error(''+err, 'middleware.update')
+	}
 }

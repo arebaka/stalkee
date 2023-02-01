@@ -14,33 +14,33 @@ import { Word } from './word'
 export class Audio extends BaseEntity {
 
 	@PrimaryGeneratedColumn()
-	id:number
+	id: number
 
 	@Column({ name: 'file_id', unique: true, length: 128 })
-	fileId:string
+	fileId: string
 
 	@Column({ name: 'file_uid', unique: true, length: 32 })
-	fileUid:string
+	fileUid: string
 
 	@Index({ fulltext: true })
 	@Column()
-	quote:string
+	quote: string
 
 	@Index()
 	@Column({ nullable: true })
-	actor:string
+	actor: string
 
 	@Index()
 	@Column({ nullable: true })
-	location:string
+	location: string
 
 	@CreateDateColumn({ name: 'added_at' })
-	addedAt:Date
+	addedAt: Date
 
 	@Index()
 	@Column({ name: 'n_uses', default: 0, unsigned: true })
-	nUses:number
+	nUses: number
 
 	@OneToMany(() => Word, word => word.audio, { cascade: true })
-	words:Word[]
+	words: Word[]
 }

@@ -1,5 +1,17 @@
+# Build
+dist
+
+# Dependencies
+node_modules
+jspm_packages
+
+# Dotenv
+.env
+.env.local
+.env.*.local
+
 # Logs
-logs/
+logs/*
 *.log
 
 # Runtime data
@@ -7,51 +19,44 @@ logs/
 *.seed
 *.pid.lock
 
-# Dependency directories
-node_modules/
-jspm_packages/
+# Temporary
+*~
+.netrwhist
 
-# TypeScript cache
+# Cache
+.cache
 *.tsbuildinfo
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history
 
-# Visual Studio Code #
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+# MacOS
+.DS_Store
 
-# Local History for Visual Studio Code
-.history/
-
-# Built Visual Studio Code Extensions
+# Visual Studio Code
+.vscode
+.history
+.vscode-test
 *.vsix
 
-# Vim Swap
+# JetBrains
+.idea
+*.iws
+.idea_modules
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+
+# Vim
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
 [._]sw[a-p]
-
-# Vim Session
 Session.vim
 Sessionx.vim
-
-# Temporary
-.netrwhist
-*~
-
-# Persistent undo
 [._]*.un~
-
-# dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
-
-# Build
-dist

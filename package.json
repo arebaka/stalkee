@@ -1,6 +1,6 @@
 {
   "name": "stalkee",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
   "bin": "./start.sh",
   "main": "dist/index.js",
@@ -8,8 +8,8 @@
   "homepage": "https://t.me/stalkeeBot",
   "scripts": {
     "test": ":",
-    "lint": "eslint .",
-    "build": "tsc",
+    "lint": "npx eslint .",
+    "build": "npx tsc",
     "prepare": "npm run --silent build",
     "prestart": "npm run build",
     "start": "cd dist; node index.js"
@@ -37,7 +37,6 @@
     "dotenv": "^16.0.1",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
-    "serverline": "^1.5.0",
     "telegraf": "^3.39.0",
     "toml": "^3.0.0",
     "typegram": "^3.9.1",

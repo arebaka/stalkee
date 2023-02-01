@@ -1,7 +1,7 @@
 import { Markup } from 'telegraf'
 
-import { markupBuilder } from '../../types'
+import { MarkupBuilder } from '../../types'
 
-export const start:markupBuilder = ctx => Markup.inlineKeyboard([[
+export const start: MarkupBuilder = ctx => Markup.inlineKeyboard([[
 	Markup.switchToChatButton(ctx.t.markups.start.buttons.switch, '')
 ]])

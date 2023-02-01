@@ -13,12 +13,12 @@ import { Audio } from './audio'
 export class Word extends BaseEntity {
 
 	@PrimaryGeneratedColumn()
-	id:number
+	id: number
 
 	@ManyToOne(() => Audio, audio => audio.words, { nullable: false, onDelete: 'CASCADE' })
-	audio:Audio
+	audio: Audio
 
 	@Index()
 	@Column()
-	word:string
+	word: string
 }

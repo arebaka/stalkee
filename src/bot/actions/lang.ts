@@ -5,8 +5,10 @@ import { config, i18n, logger } from '../../utils'
 import { User } from '../../models'
 import * as markups from '../markups'
 
-export const lang:Middleware<Context> = async ctx => {
-	const lang = ctx.match[1]
+export const lang: Middleware<Context> = async ctx => {
+	const lang = ctx.match && ctx.match[1]
+	if (!lang || !ctx.from)
+		return
 
 	if (!config.bot.locales.includes(lang)) {
 		ctx.answerCbQuery(ctx.t.actions.lang.res.invalid_lang, false)
@@ -25,6 +27,6 @@ export const lang:Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		ctx.answerCbQuery(ctx.t.common.res.fail, true)
-		logger.error(''+err, 'middleware.lang')
+		logger.error(''+err, 'action.lang')
 	}
 }

@@ -7,24 +7,24 @@ import { Context } from '../../types'
 import { config, logger } from '../../utils'
 import { Audio } from '../../models'
 
-function audioToQueryResult(audio:Audio): InlineQueryResultCachedDocument {
+function audioToQueryResult(audio: Audio): InlineQueryResultCachedDocument {
 	return {
 		type: 'document',
 		id: `${audio.fileUid}.${uuidv4()}`,
 		title: audio.quote,
-		description: `${audio.actor || ''}${audio.location ? ' ◆︎ '+audio.location : ''}\n▷ ${audio.nUses}`,
+		description: `${audio.actor || ''}${audio.location ? ' ◆︎ ' + audio.location : ''}\n▷ ${audio.nUses}`,
 		document_file_id: audio.fileId
 	}
 }
 
-const options:FindManyOptions<Audio> = {
+const options: FindManyOptions<Audio> = {
 	take: config.limits.max_result_size,
 	order: { nUses: 'DESC' }
 }
 
-export const inlineQuery:Middleware<Context> = async ctx => {
-	const query = ctx.inlineQuery.query.trim().split(/\s+/g).join(' ')
-	let audios:Audio[]
+export const inlineQuery: Middleware<Context> = async ctx => {
+	const query = ctx.inlineQuery?.query.trim().split(/\s+/g).join(' ')
+	let audios: Audio[] = []
 
 	try {
 		if (!query) {
@@ -43,7 +43,7 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 
 			audios = await Audio.find({
 				...options,
-				take: null,
+				take: undefined,
 				relations: {
 					words: true
 				}
@@ -51,7 +51,7 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 
 			for (const word of words) {
 				for (let i = 0; i < audios.length; i++) {
-					let index = audios[i].words.map(w => w.word).indexOf(word)
+					const index = audios[i].words.map(w => w.word).indexOf(word)
 
 					if (index < 0) {
 						audios.splice(i--, 1)
@@ -65,12 +65,12 @@ export const inlineQuery:Middleware<Context> = async ctx => {
 		}
 
 		ctx.answerInlineQuery(
-			audios.length ? audios.map(audioToQueryResult) : null, {
-				cache_time: 30
-		})
+			audios.length > 0 ? audios.map(audioToQueryResult) : [],
+			{ cache_time: 30 }
+		)
 	}
 	catch (err) {
-		logger.error(err, 'handler.inline_query')
-		ctx.answerInlineQuery(null, { cache_time: 30 })
+		logger.error(''+err, 'handler.inline_query')
+		ctx.answerInlineQuery([], { cache_time: 30 })
 	}
 }

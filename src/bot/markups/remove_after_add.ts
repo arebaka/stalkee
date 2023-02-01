@@ -1,10 +1,10 @@
 import { Markup } from 'telegraf'
 
-import { markupBuilder } from '../../types'
+import { MarkupBuilder } from '../../types'
 
-export const removeAfterAdd:markupBuilder = (
-	ctx, { fileUid }
+export const removeAfterAdd: MarkupBuilder = (
+	ctx, options
 ) => Markup.inlineKeyboard([[
 	Markup.callbackButton(
-		ctx.t.markups.remove_after_add.buttons.remove, `remove:${fileUid}`)
+		ctx.t.markups.remove_after_add.buttons.remove, `remove:${options?.fileUid}`)
 ]])

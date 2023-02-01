@@ -1,12 +1,15 @@
 import 'reflect-metadata'
 
+import readline from 'readline'
 import { DataSource } from 'typeorm'
 
-import { config, logger, readline } from './utils'
+import { config, logger } from './utils'
 import { Bot } from './bot'
 import { User, Audio, Word } from './models'
 
 
+
+let username: string
 
 async function start(): Promise<void> {
 	try {
@@ -15,34 +18,31 @@ async function start(): Promise<void> {
 
 		await bot.start(config.bot.options)
 		await bot.setMode('regular')
-		const username = (await bot.getMe()).username
+		username = (await bot.getMe()).username as string
 		logger.info(`@${username} started.`, 'process.start')
 	}
-	catch(err) {
+	catch (err) {
 		logger.fatal(''+err, 'process.start')
-		readline.close()
+		process.exit(1)
 	}
 
 }
 
 async function stop(): Promise<void> {
-	const username = (await bot.getMe()).username
-
 	logger.info(`Stop @${username}...`, 'process.stop')
 	await bot.stop()
-	readline.close()
 }
 
 async function reload(): Promise<void> {
-	const username = (await bot.getMe()).username
-
 	logger.info(`Reload @${username}...`, 'process.reload')
 	await bot.reload()
 	logger.info(`@${username} reloaded.`, 'process.reload')
 }
 
-async function setMode(args:string[]): Promise<void> {
-	bot.setMode(args[0])
+async function setMode(mode: string): Promise<void> {
+	await bot.setMode(mode)
+		.then(() => logger.info(`Set mode of bot @${username} to '${mode}'.`))
+		.catch(err => logger.error(err, 'bot.mode'))
 }
 
 
@@ -57,20 +57,20 @@ const db = new DataSource({
 	entities: [User, Audio, Word]
 })
 
-readline.init()
 
-readline
-	.setCommand('stop', stop)
-	.setCommand('reload', reload)
-	.setCommand('mode', setMode)
+const rl = readline.createInterface(process.stdin, process.stdout)
+rl.setPrompt('> ')
+
+rl.on('line', input => {
+	switch (input) {
+		case 'stop': stop(); break
+		case 'reload': reload(); break
+		// TODO mode
+	}
+})
 
 process
 	.on('SIGINT', stop)
 	.on('SIGTERM', stop)
-
-process.on('uncaughtException', err => {
-	logger.error(err.stack, 'process')
-	reload()
-})
 
 start()

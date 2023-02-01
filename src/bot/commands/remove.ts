@@ -4,13 +4,13 @@ import { Context } from '../../types'
 import { logger } from '../../utils'
 import { Audio } from '../../models'
 
-export const remove:Middleware<Context> = async ctx => {
-	const mess = ctx.message.reply_to_message
+export const remove: Middleware<Context> = async ctx => {
+	const message = ctx.message?.reply_to_message
 
-	if ('voice' in mess) {
+	if (message && 'voice' in message) {
 		try {
 			const audio = await Audio.findOneByOrFail({
-				fileUid: mess.voice.file_unique_id
+				fileUid: message.voice.file_unique_id
 			})
 
 			await audio.remove()

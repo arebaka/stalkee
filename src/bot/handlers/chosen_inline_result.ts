@@ -4,10 +4,10 @@ import { Context } from '../../types'
 import { logger } from '../../utils'
 import { Audio } from '../../models'
 
-export const chosenInlineResult:Middleware<Context> = async ctx => {
+export const chosenInlineResult: Middleware<Context> = async ctx => {
 	try {
 		const audio = await Audio.findOneByOrFail({
-			fileUid: ctx.chosenInlineResult.result_id.split('.')[0]
+			fileUid: ctx.chosenInlineResult?.result_id.split('.')[0]
 		})
 
 		audio.nUses++

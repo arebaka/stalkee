@@ -14,11 +14,11 @@ import * as actions from './actions'
 
 class Command implements typegram.BotCommand {
 
-	command:string
-	description:string
+	command: string
+	description: string
 
-	constructor(command:string, description:string) {
-		this.command     = command
+	constructor(command: string, description: string) {
+		this.command = command
 		this.description = description
 	}
 }
@@ -27,22 +27,23 @@ class Command implements typegram.BotCommand {
 
 export class Bot {
 
-	public static readonly commands:{[key:string]: typegram.BotCommand[]} = {
-		regular: [
-			new Command('start', 'завести шарманку')
-		],
-		admin: [
-			new Command('add', 'админа заманало каждый раз вводить'),
-			new Command('remove', 'админа заманало каждый раз вводить')
-		]
+	public static readonly commands: {[mode: string]: {[cmd: string]: string}} = {
+		regular: {
+			start: 'завести шарманку',
+		},
+		admin: {
+			add: 'админа заманало каждый раз вводить',
+			remove: 'админа заманало каждый раз вводить',
+		},
 	}
 
-	private bot:Telegraf<Context>
-	private options:LaunchOptions = {}
+	private bot: Telegraf<Context>
+	private options: LaunchOptions = {}
+	private botInfo: typegram.User
 
-	constructor(token:string) {
+	constructor(token: string) {
 		this.bot = new Telegraf<Context>(token)
-		this.bot.catch((err:Error) => logger.error(err.message, 'bot'))
+		this.bot.catch((err: Error) => logger.error(err.message, 'bot'))
 
 		this.bot.use(middlewares.update, middlewares.setLocale)
 
@@ -62,23 +63,18 @@ export class Bot {
 	}
 
 	async getMe(): Promise<typegram.User> {
-		return this.bot.telegram.getMe()
+		return await this.bot.telegram.getMe()
+			.then(info => this.botInfo = info)
 	}
 
-	async start(options:LaunchOptions): Promise<void> {
+	async start(options: LaunchOptions): Promise<void> {
+		await this.bot.launch(options)
 		this.options = options
-
-		try {
-			await this.bot.launch(options)
-		}
-		catch (err) {
-			logger.fatal(''+err, 'bot.start')
-			process.exit(1)
-		}
+		this.botInfo = await this.bot.telegram.getMe()
 	}
 
 	async stop(): Promise<void> {
-		this.bot.stop()
+		await this.bot.stop()
 	}
 
 	async reload(): Promise<void> {
@@ -86,15 +82,18 @@ export class Bot {
 		await this.start(this.options)
 	}
 
-	async setMode(mode:string): Promise<void> {
-		switch (mode) {
-			case 'regular':
-				this.bot.telegram.setMyCommands(Bot.commands.regular)
-			break
-			case 'edit':
-				this.bot.telegram.setMyCommands(
-					Bot.commands.regular.concat(Bot.commands.admin))
-			break
-		}
+	async setMode(mode: string): Promise<void> {
+		if (!Bot.commands[mode])
+			throw new Error(`No mode named ${mode}`)
+
+		const preparedCommands: {[key: string]: string} = {
+			regular: Bot.commands.regular,
+			edit: {...Bot.commands.regular, ...Bot.commands.admin},
+		}[mode] as {[key: string]: string}
+
+		await this.bot.telegram.setMyCommands(
+			Object.entries(preparedCommands)
+				.map(([cmd, descr]) => new Command(cmd, descr))
+		)
 	}
 }

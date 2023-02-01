@@ -1,3 +1,10 @@
+# Build
+dist
+
+# Dependencies
+node_modules/
+jspm_packages/
+
 # Logs
 logs/
 *.log
@@ -7,9 +14,47 @@ logs/
 *.seed
 *.pid.lock
 
-# Dependency directories
-node_modules/
-jspm_packages/
+# Temporary
+*~
+.netrwhist
+
+# Cache
+.cache
+*.tsbuildinfo
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history
+
+# MacOS
+.DS_Store
+
+# Visual Studio Code
+.vscode
+.history
+.vscode-test
+*.vsix
+
+# JetBrains
+.idea
+*.iws
+.idea_modules
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+[._]*.un~
 
 # Git
 .git
@@ -20,6 +65,8 @@ jspm_packages/
 .cache
 
 # Dotfiles
+.gitattributes
+.gitignore
 .npmignore
 .editorconfig
 .github
@@ -27,6 +74,3 @@ jspm_packages/
 # License and readme
 LICENSE
 README*
-
-# Build
-dist

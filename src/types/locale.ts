@@ -1,74 +1,74 @@
-type Dict = {[key:string]: string}
+type Dict = {[key: string]: string}
 
 interface Command {
-	res:Dict
+	res: Dict
 }
 
 interface Handler {
-	res:Dict
+	res: Dict
 }
 
 interface Markup {
-	buttons:Dict
+	buttons: Dict
 }
 
 interface Action {
-	res:Dict
+	res: Dict
 }
 
 export interface Locale {
-	language:string
-	name:string
-	common:{
-		res:Dict & {
+	language: string
+	name: string
+	common: {
+		res: Dict & {
 			fail: string
 		}
 	}
-	commands:{
-		start:Command & {
-			res:{
-				ok:string
+	commands: {
+		start: Command & {
+			res: {
+				ok: string
 			}
 		}
-		add:Command & {
-			res:{
-				ok:string
-				already_added:string
+		add: Command & {
+			res: {
+				ok: string
+				already_added: string
 			}
 		}
-		remove:Command & {
-			res:{
-				ok:string
-				not_found:string
+		remove: Command & {
+			res: {
+				ok: string
+				not_found: string
 			}
 		}
 	}
-	handlers:{
-		inlineQuery:Handler & { res: Record<string, never> }
-		chosen_inline_query:Handler & { res: Record<string, never> }
+	handlers: {
+		inlineQuery: Handler & { res: Record<string, never> }
+		chosen_inline_query: Handler & { res: Record<string, never> }
 	}
-	markups:{
-		lang:Markup & { buttons: Record<string, never> }
-		start:Markup & {
+	markups: {
+		lang: Markup & { buttons: Record<string, never> }
+		start: Markup & {
 			buttons: {
-				switch:string
+				switch: string
 			}
 		}
-		remove_after_add:Markup & {
-			buttons:{
-				remove:string
+		remove_after_add: Markup & {
+			buttons: {
+				remove: string
 			}
 		}
 	}
-	actions:{
-		lang:Action & {
-			res:{
-				invalid_lang:string
+	actions: {
+		lang: Action & {
+			res: {
+				invalid_lang: string
 			}
 		}
-		remove:Action & {
-			res:{
-				ok:string
+		remove: Action & {
+			res: {
+				ok: string
 			}
 		}
 	}
