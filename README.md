@@ -43,7 +43,7 @@ npm i stalkee
 
 - `BOT_TOKEN` – токен бота от @BotFather
 - `BOT_ADMINS` – Telegram ID-ы админов бота через пробел, они будут иметь доступ к редактированию базы реплик; может состоять всего из одного ID
-- `DB_URI` – URI-строка для подключения к PSQL в формате `postgres://<USER>:<PASSWORD>@<HOST>/<DATABASE>:<PORT>`
+- `DB_URI` – URI-строка для подключения к PSQL в формате `postgres://<USER>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>`
 
 Вместо задания параметров через переменные окружения
 можно прописать их в файле `node_modules/stalkee/config.toml`.

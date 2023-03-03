@@ -1,6 +1,6 @@
 {
   "name": "stalkee",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
   "bin": "./start.sh",
   "main": "dist/index.js",
@@ -11,7 +11,6 @@
     "lint": "npx eslint .",
     "build": "npx tsc",
     "prepare": "npm run --silent build",
-    "prestart": "npm run build",
     "start": "cd dist; node index.js"
   },
   "bugs": {
