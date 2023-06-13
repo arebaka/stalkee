@@ -7,8 +7,9 @@ import * as markups from '../markups'
 
 export const lang: Middleware<Context> = async ctx => {
 	const lang = ctx.match && ctx.match[1]
-	if (!lang || !ctx.from)
+	if (!lang || !ctx.from) {
 		return
+	}
 
 	if (!config.bot.locales.includes(lang)) {
 		ctx.answerCbQuery(ctx.t.actions.lang.res.invalid_lang, false)

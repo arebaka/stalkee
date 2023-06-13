@@ -6,8 +6,9 @@ import { Audio } from '../../models'
 
 export const remove: Middleware<Context> = async ctx => {
 	const fileUid = ctx.match && ctx.match[1]
-	if (!fileUid)
+	if (!fileUid) {
 		return
+	}
 
 	try {
 		await Audio.delete({ fileUid: fileUid })

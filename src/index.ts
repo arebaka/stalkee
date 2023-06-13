@@ -14,11 +14,13 @@ let username: string
 async function start(): Promise<void> {
 	try {
 		await db.initialize()
-		logger.info(`Connected to database.`, 'process.start')
+		logger.info('connected to database.', 'process.start')
 
 		await bot.start(config.bot.options)
 		await bot.setMode('regular')
-		username = (await bot.getMe()).username as string
+		const botInfo = await bot.getMe()
+		username = botInfo.username as string
+
 		logger.info(`@${username} started.`, 'process.start')
 	}
 	catch (err) {
@@ -29,20 +31,34 @@ async function start(): Promise<void> {
 }
 
 async function stop(): Promise<void> {
-	logger.info(`Stop @${username}...`, 'process.stop')
+	logger.info(`stop @${username}...`, 'process.stop')
 	await bot.stop()
 }
 
 async function reload(): Promise<void> {
-	logger.info(`Reload @${username}...`, 'process.reload')
-	await bot.reload()
-	logger.info(`@${username} reloaded.`, 'process.reload')
+	try {
+		logger.info(`reload @${username}...`, 'process.reload')
+		await bot.reload()
+		logger.info(`@${username} reloaded.`, 'process.reload')
+	}
+	catch (err) {
+		logger.error(''+err, 'process.reload')
+	}
 }
 
 async function setMode(mode: string): Promise<void> {
-	await bot.setMode(mode)
-		.then(() => logger.info(`Set mode of bot @${username} to '${mode}'.`))
-		.catch(err => logger.error(err, 'bot.mode'))
+	try {
+		if (!mode) {
+			logger.error('mode is empty!', 'process.mode')
+			return
+		}
+
+		await bot.setMode(mode)
+		logger.info(`set mode of bot @${username} to '${mode}'.`, 'process.mode')
+	}
+	catch (err) {
+		logger.error(''+err, 'process.mode')
+	}
 }
 
 
@@ -62,10 +78,11 @@ const rl = readline.createInterface(process.stdin, process.stdout)
 rl.setPrompt('> ')
 
 rl.on('line', input => {
-	switch (input) {
+	const [command, ...args] = input.split(/\s/g)
+	switch (command) {
 		case 'stop': stop(); break
 		case 'reload': reload(); break
-		// TODO mode
+		case 'mode': setMode(args[0]); break;
 	}
 })
 

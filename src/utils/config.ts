@@ -28,8 +28,8 @@ class Config {
 
 dotenv.config({ override: false })
 
-const raw: string = fs.readFileSync(path.resolve('../config.toml'), 'utf-8')
-const config: Config = toml.parse(raw)
+const source = fs.readFileSync(path.resolve('config.toml'), 'utf-8')
+const config: Config = toml.parse(source)
 
 config.bot.token = process.env.BOT_TOKEN || config.bot.token
 config.db.uri = process.env.DB_URI || config.db.uri

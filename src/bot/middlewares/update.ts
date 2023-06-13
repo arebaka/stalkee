@@ -7,8 +7,9 @@ import { User } from '../../models'
 const DEFAULT_LANG = config.bot.locales[0]
 
 export const update: Middleware<Context> = async (ctx, next) => {
-	if (!ctx.from)
+	if (!ctx.from) {
 		return next()
+	}
 
 	try {
 		let user = await User.findOneBy({ id: ctx.from.id })

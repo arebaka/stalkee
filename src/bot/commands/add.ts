@@ -1,3 +1,7 @@
+import path from 'path'
+import fs from 'fs'
+import axios from 'axios'
+import ffmpeg from 'fluent-ffmpeg'
 import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
@@ -9,31 +13,56 @@ export const add: Middleware<Context> = async ctx => {
 	const message = ctx.message?.reply_to_message
 	const quote = ctx.message?.text.split(/\s+/g).slice(1).join(' ')
 
-	if (message && quote && 'voice' in message) {
-		try {
-			const audio = new Audio()
+	if (!message || !quote) {
+		return
+	}
 
+	try {
+		const audio = new Audio()
+
+		audio.quote = quote
+		audio.words = quote
+			.replace(/[,./?!@#%^&*;:-=+\\|`~()[\]{}]/g, '')
+			.split(/\s+/g)
+			.map(word => Word.create({ word }))
+
+		if ('voice' in message) {
 			audio.fileId = message.voice.file_id
 			audio.fileUid = message.voice.file_unique_id
-			audio.quote = quote
+		}
+		else if ('audio' in message) {
+			await ctx.replyWithChatAction('record_audio')
 
-			audio.words = quote
-				.replace(/[,./?!@#%^&*;:-=+\\|`~()[\]{}]/g, '')
-				.split(/\s+/g)
-				.map(word => Word.create({ word }))
+			const fileLink = await ctx.telegram.getFileLink(message.audio.file_id)
+			const stream: fs.ReadStream = await axios(fileLink, { responseType: 'stream' }).then(res => res.data)
 
-			await audio.save()
-
-			ctx.reply(ctx.t.commands.add.res.ok, Extra
-				.HTML()
-				.markup(markups.removeAfterAdd(ctx, { fileUid: audio.fileUid }))
+			await new Promise((resolve, reject) => ffmpeg(stream)
+				.audioCodec('libopus')
+				.output(path.resolve('temp.ogg'))
+				.on('error', reject)
+				.on('end', resolve)
+				.run()
 			)
 
-			logger.info(`added ${audio.fileUid}`, 'command.add')
+			const tempMessage = await ctx.replyWithVoice({
+				source: path.resolve('temp.ogg'), filename: 'message.ogg'
+			})
+			audio.fileId = tempMessage.voice.file_id
+			audio.fileUid = tempMessage.voice.file_unique_id
+			fs.unlinkSync(path.resolve('temp.ogg'))
 		}
-		catch (err) {
-			logger.error(''+err, 'command.add')
-			ctx.reply(ctx.t.commands.add.res.already_added, Extra.HTML())
-		}
+
+		await audio.save()
+
+		ctx.reply(ctx.t.commands.add.res.ok, Extra
+			.HTML()
+			.markup(markups.removeAfterAdd(ctx, { fileUid: audio.fileUid }))
+		)
+
+		logger.info(`added ${audio.fileUid}`, 'command.add')
+	}
+	catch (err) {
+		logger.error(''+err, 'command.add')
+		ctx.reply(ctx.t.commands.add.res.already_added, Extra.HTML())
 	}
 }

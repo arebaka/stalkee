@@ -12,6 +12,8 @@ import * as actions from './actions'
 
 
 
+type CommandMap = {[mode: string]: {[cmd: string]: string}}
+
 class Command implements typegram.BotCommand {
 
 	command: string
@@ -27,7 +29,7 @@ class Command implements typegram.BotCommand {
 
 export class Bot {
 
-	public static readonly commands: {[mode: string]: {[cmd: string]: string}} = {
+	public static readonly commands: CommandMap = {
 		regular: {
 			start: 'завести шарманку',
 		},
@@ -35,6 +37,11 @@ export class Bot {
 			add: 'админа заманало каждый раз вводить',
 			remove: 'админа заманало каждый раз вводить',
 		},
+	}
+
+	public static readonly modeCommands: CommandMap = {
+		regular: Bot.commands.regular,
+		edit: {...Bot.commands.regular, ...Bot.commands.admin},
 	}
 
 	private bot: Telegraf<Context>
@@ -50,7 +57,7 @@ export class Bot {
 		this.bot.command('start', commands.start)
 
 		this.bot
-			.command('add', filters.admin, filters.replyToVoice, commands.add)
+			.command('add', filters.admin, filters.replyToVoiceOrAudio, commands.add)
 			.command('remove', filters.admin, filters.replyToVoice, commands.remove)
 
 		this.bot
@@ -63,8 +70,8 @@ export class Bot {
 	}
 
 	async getMe(): Promise<typegram.User> {
-		return await this.bot.telegram.getMe()
-			.then(info => this.botInfo = info)
+		this.botInfo = await this.bot.telegram.getMe()
+		return this.botInfo
 	}
 
 	async start(options: LaunchOptions): Promise<void> {
@@ -83,13 +90,11 @@ export class Bot {
 	}
 
 	async setMode(mode: string): Promise<void> {
-		if (!Bot.commands[mode])
+		if (!Bot.modeCommands[mode]) {
 			throw new Error(`No mode named ${mode}`)
+		}
 
-		const preparedCommands: {[key: string]: string} = {
-			regular: Bot.commands.regular,
-			edit: {...Bot.commands.regular, ...Bot.commands.admin},
-		}[mode] as {[key: string]: string}
+		const preparedCommands = Bot.modeCommands[mode]
 
 		await this.bot.telegram.setMyCommands(
 			Object.entries(preparedCommands)

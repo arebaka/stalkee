@@ -1,6 +1,6 @@
 {
   "name": "stalkee",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
   "bin": "./start.sh",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
     "lint": "npx eslint .",
     "build": "npx tsc",
     "prepare": "npm run --silent build",
-    "start": "cd dist; node index.js"
+    "start": "node dist/index.js"
   },
   "bugs": {
     "url": "https://github.com/arebaka/stalkee/issues"
@@ -33,7 +33,9 @@
   ],
   "dependencies": {
     "@arelive/logger": "^2.0.0",
+    "axios": "^1.4.0",
     "dotenv": "^16.0.1",
+    "fluent-ffmpeg": "^2.1.2",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "telegraf": "^3.39.0",
@@ -44,6 +46,7 @@
     "yaml": "^2.0.1"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.21",
     "@types/node": "^17.0.24",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
