@@ -34,6 +34,30 @@ commands:
       ok: Ныкайся - не ныкайся, мы тя всё равно надыбаем!
       not_found: У меня ничего нет, не стреляйте!
 
+  quote:
+    res:
+      ok: |
+        Старая реплика:
+        {old_quote}
+
+        Новая реплика:
+        {quote}
+      not_found: Где же он спрятался?
+
+  actor:
+    res:
+      ok: |
+        Старый персонаж: {old_actor}
+        Новый персонаж: {actor}
+      not_found: Где же он спрятался?
+
+  location:
+    res:
+      ok: |
+        Старая локация: {old_location}
+        Новая локация: {location}
+      not_found: Где же он спрятался?
+
 markups:
   start:
     buttons:

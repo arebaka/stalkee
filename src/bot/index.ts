@@ -37,6 +37,9 @@ export class Bot {
 		admin: {
 			add: 'админа заманало каждый раз вводить',
 			remove: 'админа заманало каждый раз вводить',
+			quote: 'админа заманало каждый раз вводить',
+			actor: 'админа заманало каждый раз вводить',
+			location: 'админа заманало каждый раз вводить',
 		},
 	}
 
@@ -61,6 +64,9 @@ export class Bot {
 		this.bot
 			.command('add', filters.admin, filters.replyToVoiceOrAudio, commands.add)
 			.command('remove', filters.admin, filters.replyToVoice, commands.remove)
+			.command('quote', filters.admin, filters.replyToVoice, commands.quote)
+			.command('actor', filters.admin, filters.replyToVoice, commands.actor)
+			.command('location', filters.admin, filters.replyToVoice, commands.location)
 
 		this.bot
 			.action(/^lang:(.*)$/, actions.lang)

@@ -48,6 +48,24 @@ export interface Locale {
 				not_found: string
 			}
 		}
+		quote: Command & {
+			res: {
+				ok: string
+				not_found: string
+			}
+		}
+		actor: Command & {
+			res: {
+				ok: string
+				not_found: string
+			}
+		}
+		location: Command & {
+			res: {
+				ok: string
+				not_found: string
+			}
+		}
 	}
 	handlers: {
 		inlineQuery: Handler & { res: Record<string, never> }
