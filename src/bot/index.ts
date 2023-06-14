@@ -32,6 +32,7 @@ export class Bot {
 	public static readonly commands: CommandMap = {
 		regular: {
 			start: 'завести шарманку',
+			info: 'сейчас я попробую настроить прототип',
 		},
 		admin: {
 			add: 'админа заманало каждый раз вводить',
@@ -55,6 +56,7 @@ export class Bot {
 		this.bot.use(middlewares.update, middlewares.setLocale)
 
 		this.bot.command('start', commands.start)
+		this.bot.command('info', filters.replyToVoice, commands.info)
 
 		this.bot
 			.command('add', filters.admin, filters.replyToVoiceOrAudio, commands.add)

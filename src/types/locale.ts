@@ -30,6 +30,12 @@ export interface Locale {
 				ok: string
 			}
 		}
+		info: Command & {
+			res: {
+				ok: string
+				not_found: string
+			}
+		}
 		add: Command & {
 			res: {
 				ok: string
