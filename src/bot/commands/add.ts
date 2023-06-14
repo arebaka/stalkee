@@ -22,7 +22,7 @@ export const add: Middleware<Context> = async ctx => {
 
 		audio.quote = quote
 		audio.words = quote
-			.replace(/[,./?!@#%^&*;:-=+\\|`~()[\]{}]/g, '')
+			.replace(/[,./?!@#%^&*;:\-=+\\|`~()[\]{}]/g, '')
 			.split(/\s+/g)
 			.map(word => Word.create({ word }))
 
