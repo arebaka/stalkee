@@ -14,19 +14,6 @@ import * as actions from './actions'
 
 type CommandMap = {[mode: string]: {[cmd: string]: string}}
 
-class Command implements typegram.BotCommand {
-
-	command: string
-	description: string
-
-	constructor(command: string, description: string) {
-		this.command = command
-		this.description = description
-	}
-}
-
-
-
 export class Bot {
 
 	public static readonly commands: CommandMap = {
@@ -106,7 +93,7 @@ export class Bot {
 
 		await this.bot.telegram.setMyCommands(
 			Object.entries(preparedCommands)
-				.map(([cmd, descr]) => new Command(cmd, descr))
+				.map(([command, description]) => ({ command, description }))
 		)
 	}
 }

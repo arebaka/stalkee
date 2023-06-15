@@ -28,7 +28,7 @@ export const actor: Middleware<Context> = async ctx => {
 		logger.info(`set actor of ${audio.fileUid} to ${actor}`, 'command.actor')
 	}
 	catch (err) {
-		logger.error(''+err, 'command.actor')
+		logger.error(err as string, 'command.actor')
 		ctx.reply(ctx.t.commands.actor.res.not_found, Extra.HTML())
 	}
 }

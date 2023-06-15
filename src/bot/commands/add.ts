@@ -38,18 +38,18 @@ export const add: Middleware<Context> = async ctx => {
 
 			await new Promise((resolve, reject) => ffmpeg(stream)
 				.audioCodec('libopus')
-				.output(path.resolve('temp.ogg'))
+				.output(path.resolve(__dirname, '../../temp.ogg'))
 				.on('error', reject)
 				.on('end', resolve)
 				.run()
 			)
 
 			const tempMessage = await ctx.replyWithVoice({
-				source: path.resolve('temp.ogg'), filename: 'message.ogg'
+				source: path.resolve(__dirname, '../../temp.ogg'), filename: 'message.ogg'
 			})
 			audio.fileId = tempMessage.voice.file_id
 			audio.fileUid = tempMessage.voice.file_unique_id
-			fs.unlinkSync(path.resolve('temp.ogg'))
+			fs.unlinkSync(path.resolve(__dirname, '../../temp.ogg'))
 		}
 
 		await audio.save()
@@ -62,7 +62,7 @@ export const add: Middleware<Context> = async ctx => {
 		logger.info(`added ${audio.fileUid}`, 'command.add')
 	}
 	catch (err) {
-		logger.error(''+err, 'command.add')
+		logger.error(err as string, 'command.add')
 		ctx.reply(ctx.t.commands.add.res.already_added, Extra.HTML())
 	}
 }

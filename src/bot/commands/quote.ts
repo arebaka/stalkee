@@ -35,7 +35,7 @@ export const quote: Middleware<Context> = async ctx => {
 		logger.info(`set quote of ${audio.fileUid}`, 'command.quote')
 	}
 	catch (err) {
-		logger.error(''+err, 'command.quote')
+		logger.error(err as string, 'command.quote')
 		ctx.reply(ctx.t.commands.quote.res.not_found, Extra.HTML())
 	}
 }

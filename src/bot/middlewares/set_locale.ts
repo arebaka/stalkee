@@ -15,6 +15,6 @@ export const setLocale: Middleware<Context> = async (ctx, next) => {
 		next()
 	}
 	catch (err) {
-		logger.error(''+err, 'middleware.set_locale')
+		logger.error(err as string, 'middleware.set_locale')
 	}
 }

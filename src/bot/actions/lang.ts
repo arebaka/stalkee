@@ -28,6 +28,6 @@ export const lang: Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		ctx.answerCbQuery(ctx.t.common.res.fail, true)
-		logger.error(''+err, 'action.lang')
+		logger.error(err as string, 'action.lang')
 	}
 }

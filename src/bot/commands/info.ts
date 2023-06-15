@@ -21,7 +21,7 @@ export const info: Middleware<Context> = async ctx => {
 			)
 		}
 		catch (err) {
-			logger.error(''+err, 'command.info')
+			logger.error(err as string, 'command.info')
 			ctx.reply(ctx.t.commands.info.res.not_found, Extra.HTML())
 		}
 	}

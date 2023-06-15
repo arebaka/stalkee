@@ -28,7 +28,7 @@ export const location: Middleware<Context> = async ctx => {
 		logger.info(`set location of ${audio.fileUid} to ${location}`, 'command.location')
 	}
 	catch (err) {
-		logger.error(''+err, 'command.actor')
+		logger.error(err as string, 'command.actor')
 		ctx.reply(ctx.t.commands.location.res.not_found, Extra.HTML())
 	}
 }

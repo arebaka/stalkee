@@ -19,7 +19,7 @@ export const remove: Middleware<Context> = async ctx => {
 			logger.info(`removed ${audio.fileUid}`, 'command.remove')
 		}
 		catch (err) {
-			logger.error(''+err, 'command.remove')
+			logger.error(err as string, 'command.remove')
 			ctx.reply(ctx.t.commands.remove.res.not_found, Extra.HTML())
 		}
 	}

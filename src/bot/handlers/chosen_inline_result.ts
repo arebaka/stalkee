@@ -14,6 +14,6 @@ export const chosenInlineResult: Middleware<Context> = async ctx => {
 		await audio.save()
 	}
 	catch (err) {
-		logger.error(''+err, 'handler.chosen_inline_result')
+		logger.error(err as string, 'handler.chosen_inline_result')
 	}
 }

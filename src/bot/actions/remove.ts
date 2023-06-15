@@ -16,6 +16,6 @@ export const remove: Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		ctx.answerCbQuery(ctx.t.common.res.fail, true)
-		logger.error(''+err, 'action.remove')
+		logger.error(err as string, 'action.remove')
 	}
 }

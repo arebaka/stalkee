@@ -8,7 +8,7 @@ import { config } from './config'
 const i18n: {[key: string]: Locale} = {}
 
 for (const lang of config.bot.locales) {
-	const source = fs.readFileSync(path.resolve(`res/i18n/${lang}.yaml`), 'utf8')
+	const source = fs.readFileSync(path.resolve(__dirname, `../../res/i18n/${lang}.yaml`), 'utf8')
 	i18n[lang] = yaml.parse(source)
 }
 
