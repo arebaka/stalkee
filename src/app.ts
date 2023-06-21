@@ -7,10 +7,10 @@ import { User, Audio, Word } from './models'
 
 export class App {
 
-	bot: Bot
-	db: DataSource
-	dbLogger: Logger
-	username: string
+	private bot: Bot
+	private db: DataSource
+	private dbLogger: Logger
+	private username: string
 
 	constructor() {
 		this.bot = new Bot(config.bot.token)

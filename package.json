@@ -1,11 +1,14 @@
 {
   "name": "stalkee",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
-  "bin": "./start.sh",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "arelive <me@are.moe> (https://are.moe)",
+  "repository": "github:arebaka/stalkee",
   "homepage": "https://t.me/stalkeeBot",
+  "main": "dist/index.js",
+  "bin": "./start.sh",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": ":",
     "lint": "npx eslint .",
@@ -16,9 +19,6 @@
   "bugs": {
     "url": "https://github.com/arebaka/stalkee/issues"
   },
-  "author": "arelive <me@are.moe> (https://are.moe)",
-  "license": "MIT",
-  "repository": "github:arebaka/stalkee",
   "funding": {
     "type": "patreon",
     "url": "https://www.patreon.com/arelive"

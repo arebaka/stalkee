@@ -5,25 +5,24 @@ services:
     image: postgres:14-alpine
     hostname: database
     restart: always
-    ports:
-      - 15432:5432
+    expose:
+      - 5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=bot
+      - POSTGRES_USER=stalkee
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=stalkee
-    volumes:
-      - data:/var/lib/postgresql/data
 
   bot:
-    hostname: bot
     depends_on:
       - database
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    build: .
+    hostname: bot
+    restart: on-failure
     env_file: .env
     environment:
-      - DB_URI=postgres://bot:password@database/stalkee
+      - DB_URI=postgres://stalkee:password@database
 
 volumes:
   data:

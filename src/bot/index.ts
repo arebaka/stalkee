@@ -56,8 +56,8 @@ export class Bot {
 			.command('location', filters.admin, filters.replyToVoice, commands.location)
 
 		this.bot
-			.action(/^lang:(.*)$/, actions.lang)
-			.action(/^remove:(.*)$/, actions.remove)
+			.action(/^lang:([^:]+)$/, actions.lang)
+			.action(/^remove:([^:]+)$/, actions.remove)
 
 		this.bot
 			.on('inline_query', handlers.inlineQuery)
