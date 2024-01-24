@@ -21,7 +21,7 @@ export const actor: Middleware<Context> = async ctx => {
 		audio.actor = actor
 		await audio.save()
 
-		ctx.reply(ctx.t.commands.actor.res.ok
+		await ctx.reply(ctx.t.commands.actor.res.ok
 			.replace('{old_actor}', oldActor || '')
 			.replace('{actor}', actor || ''))
 
@@ -29,6 +29,6 @@ export const actor: Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		logger.error(err as string, 'command.actor')
-		ctx.reply(ctx.t.commands.actor.res.not_found, Extra.HTML())
+		await ctx.reply(ctx.t.commands.actor.res.not_found, Extra.HTML())
 	}
 }

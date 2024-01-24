@@ -54,7 +54,7 @@ export const add: Middleware<Context> = async ctx => {
 
 		await audio.save()
 
-		ctx.reply(ctx.t.commands.add.res.ok, Extra
+		await ctx.reply(ctx.t.commands.add.res.ok, Extra
 			.HTML()
 			.markup(markups.removeAfterAdd(ctx, { fileUid: audio.fileUid }))
 		)
@@ -63,6 +63,6 @@ export const add: Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		logger.error(err as string, 'command.add')
-		ctx.reply(ctx.t.commands.add.res.already_added, Extra.HTML())
+		await ctx.reply(ctx.t.commands.add.res.already_added, Extra.HTML())
 	}
 }

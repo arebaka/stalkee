@@ -64,13 +64,13 @@ export const inlineQuery: Middleware<Context> = async ctx => {
 			audios.splice(config.limits.max_result_size)
 		}
 
-		ctx.answerInlineQuery(
+		await ctx.answerInlineQuery(
 			audios.length > 0 ? audios.map(audioToQueryResult) : [],
 			{ cache_time: 30 }
 		)
 	}
 	catch (err) {
 		logger.error(''+err, 'handler.inline_query')
-		ctx.answerInlineQuery([], { cache_time: 30 })
+		await ctx.answerInlineQuery([], { cache_time: 30 })
 	}
 }

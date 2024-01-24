@@ -12,7 +12,7 @@ export const lang: Middleware<Context> = async ctx => {
 	}
 
 	if (!config.bot.locales.includes(lang)) {
-		ctx.answerCbQuery(ctx.t.actions.lang.res.invalid_lang, false)
+		await ctx.answerCbQuery(ctx.t.actions.lang.res.invalid_lang, false)
 		return
 	}
 
@@ -22,12 +22,12 @@ export const lang: Middleware<Context> = async ctx => {
 		user.save()
 
 		ctx.t = i18n[lang]
-		ctx.editMessageText(ctx.t.commands.start.res.ok, Extra
+		await ctx.editMessageText(ctx.t.commands.start.res.ok, Extra
 			.HTML()
 			.markup(markups.start(ctx)))
 	}
 	catch (err) {
-		ctx.answerCbQuery(ctx.t.common.res.fail, true)
+		await ctx.answerCbQuery(ctx.t.common.res.fail, true)
 		logger.error(err as string, 'action.lang')
 	}
 }

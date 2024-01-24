@@ -4,7 +4,7 @@ import { Context } from '../../types'
 import * as markups from '../markups'
 
 export const start: Middleware<Context> = async ctx => {
-	ctx.reply(
+	await ctx.reply(
 		ctx.t.commands.start.res.ok,
 		Extra.HTML().markup(markups.lang(ctx))
 	)

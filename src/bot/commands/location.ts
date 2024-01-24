@@ -21,7 +21,7 @@ export const location: Middleware<Context> = async ctx => {
 		audio.location = location
 		await audio.save()
 
-		ctx.reply(ctx.t.commands.location.res.ok
+		await ctx.reply(ctx.t.commands.location.res.ok
 			.replace('{old_location}', oldLocation || '')
 			.replace('{location}', location || ''))
 
@@ -29,6 +29,6 @@ export const location: Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		logger.error(err as string, 'command.actor')
-		ctx.reply(ctx.t.commands.location.res.not_found, Extra.HTML())
+		await ctx.reply(ctx.t.commands.location.res.not_found, Extra.HTML())
 	}
 }

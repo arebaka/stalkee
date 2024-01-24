@@ -26,7 +26,7 @@ export const update: Middleware<Context> = async (ctx, next) => {
 		user.updatedAt = new Date()
 
 		await user.save()
-		next()
+		return next()
 	}
 	catch (err) {
 		logger.error(''+err, 'middleware.update')

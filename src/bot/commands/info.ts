@@ -13,7 +13,7 @@ export const info: Middleware<Context> = async ctx => {
 				fileUid: message.voice.file_unique_id
 			})
 
-			ctx.reply(ctx.t.commands.info.res.ok
+			await ctx.reply(ctx.t.commands.info.res.ok
 				.replace('{actor}', audio.actor || '')
 				.replace('{location}', audio.location || '')
 				.replace('{n_uses}', ''+audio.nUses || '')
@@ -22,7 +22,7 @@ export const info: Middleware<Context> = async ctx => {
 		}
 		catch (err) {
 			logger.error(err as string, 'command.info')
-			ctx.reply(ctx.t.commands.info.res.not_found, Extra.HTML())
+			await ctx.reply(ctx.t.commands.info.res.not_found, Extra.HTML())
 		}
 	}
 }

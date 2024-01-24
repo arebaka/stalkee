@@ -12,10 +12,10 @@ export const remove: Middleware<Context> = async ctx => {
 
 	try {
 		await Audio.delete({ fileUid: fileUid })
-		ctx.editMessageText(ctx.t.actions.remove.res.ok)
+		await ctx.editMessageText(ctx.t.actions.remove.res.ok)
 	}
 	catch (err) {
-		ctx.answerCbQuery(ctx.t.common.res.fail, true)
+		await ctx.answerCbQuery(ctx.t.common.res.fail, true)
 		logger.error(err as string, 'action.remove')
 	}
 }

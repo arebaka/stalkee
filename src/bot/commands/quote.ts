@@ -28,7 +28,7 @@ export const quote: Middleware<Context> = async ctx => {
 
 		await audio.save()
 
-		ctx.reply(ctx.t.commands.quote.res.ok
+		await ctx.reply(ctx.t.commands.quote.res.ok
 			.replace('{old_quote}', oldQuote || '')
 			.replace('{quote}', quote || ''))
 
@@ -36,6 +36,6 @@ export const quote: Middleware<Context> = async ctx => {
 	}
 	catch (err) {
 		logger.error(err as string, 'command.quote')
-		ctx.reply(ctx.t.commands.quote.res.not_found, Extra.HTML())
+		await ctx.reply(ctx.t.commands.quote.res.not_found, Extra.HTML())
 	}
 }

@@ -12,7 +12,7 @@ export const setLocale: Middleware<Context> = async (ctx, next) => {
 	try {
 		const user = await User.findOneByOrFail({ id: ctx.from.id })
 		ctx.t = i18n[user.language] || i18n[config.bot.locales[0]]
-		next()
+		return next()
 	}
 	catch (err) {
 		logger.error(err as string, 'middleware.set_locale')
