@@ -38,6 +38,35 @@ export const inlineQuery: Middleware<Context> = async ctx => {
 				}
 			})
 		}
+		else if (query.length > 1 && (query.startsWith('@') || query.startsWith('~'))) {
+			let actor, location, first, second
+			const secondMarker = query[0] == '@' ? '~' : '@'
+			first = query.slice(1)
+
+			const secondMarkerIndex = first.indexOf(secondMarker)
+			if (secondMarkerIndex > -1) {
+				second = first.slice(secondMarkerIndex + 1).trim()
+				first = first.slice(0, secondMarkerIndex).trim()
+			}
+
+			if (secondMarker == '@') {
+				actor = second
+				location = first
+			} else {
+				actor = first
+				location = second
+			}
+			actor = actor || undefined
+			location = location || undefined
+
+			audios = await Audio.find({
+				...options,
+				where: {
+					actor: actor,
+					location: location,
+				}
+			})
+		}
 		else {
 			const words = query.split(' ')
 

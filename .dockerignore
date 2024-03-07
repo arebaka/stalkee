@@ -1,6 +1,9 @@
 # Build
 dist
 
+# Data
+data
+
 # Dependencies
 node_modules/
 jspm_packages/
