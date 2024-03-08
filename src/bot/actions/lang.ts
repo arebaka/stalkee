@@ -2,8 +2,8 @@ import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
 import { config, i18n, logger } from '../../utils'
-import { User } from '../../models'
 import * as markups from '../markups'
+import { setLang } from '../../controllers'
 
 export const lang: Middleware<Context> = async ctx => {
 	const lang = ctx.match && ctx.match[1]
@@ -11,16 +11,13 @@ export const lang: Middleware<Context> = async ctx => {
 		return
 	}
 
-	if (!config.bot.locales.includes(lang)) {
-		await ctx.answerCbQuery(ctx.t.actions.lang.res.invalid_lang, false)
-		return
-	}
-
 	try {
-		const user = await User.findOneByOrFail({ id: ctx.from.id })
-		user.language = lang
-		user.save()
+		if (!config.bot.locales.includes(lang)) {
+			await ctx.answerCbQuery(ctx.t.actions.lang.res.invalid_lang, false)
+			return
+		}
 
+		await setLang(ctx.from, lang)
 		ctx.t = i18n[lang]
 		await ctx.editMessageText(ctx.t.commands.start.res.ok, Extra
 			.HTML()

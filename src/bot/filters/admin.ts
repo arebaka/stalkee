@@ -1,7 +1,7 @@
 import type { Context } from '../../types'
 import { config, logger } from '../../utils'
 
-export function admin(ctx: Context): boolean {
+export const admin = (ctx: Context): boolean => {
 	if (!ctx.from) {
 		return false
 	}

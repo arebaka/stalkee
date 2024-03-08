@@ -2,38 +2,24 @@ import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
 import { logger } from '../../utils'
-import { Audio, Word } from '../../models'
+import { setQuote } from '../../controllers'
 
 export const quote: Middleware<Context> = async ctx => {
-	const message = ctx.message?.reply_to_message
-	const quote = ctx.message?.text.split(/\s+/g).slice(1).join(' ')
-
-	if (!message || !quote || !('voice' in message)) {
-		return
-	}
-
 	try {
-		const audio = await Audio.findOneByOrFail({
-			fileUid: message.voice.file_unique_id
-		})
-		const oldQuote = audio.quote
-		const words = await Word.findBy({ audio: { id: audio.id } })
+		const message = ctx.message?.reply_to_message
+		const quote = ctx.message?.text.split(/\s+/g).slice(1).join(' ')
+		if (!message || !quote || !('voice' in message)) {
+			return
+		}
 
-		audio.quote = quote
-		Word.remove(words)
-		audio.words = quote
-			.toLowerCase()
-			.replace(/[,./?!@#%^&*;:\-=+\\|`~()[\]{}\u2013]/g, '')
-			.split(/\s+/g)
-			.map(word => Word.create({ word }))
-
-		await audio.save()
+		const fileUid = message.voice.file_unique_id
+		const oldQuote = await setQuote(fileUid, quote)
 
 		await ctx.reply(ctx.t.commands.quote.res.ok
 			.replace('{old_quote}', oldQuote || '')
 			.replace('{quote}', quote || ''))
 
-		logger.info(`set quote of ${audio.fileUid}`, 'command.quote')
+		logger.info(`set quote of ${fileUid}`, 'command.quote')
 	}
 	catch (err) {
 		logger.error(err as string, 'command.quote')

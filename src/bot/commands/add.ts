@@ -6,30 +6,23 @@ import { Extra, Middleware } from 'telegraf'
 
 import { Context } from '../../types'
 import { logger } from '../../utils'
-import { Audio, Word } from '../../models'
 import * as markups from '../markups'
+import { addAudio } from '../../controllers/add_audio'
 
 export const add: Middleware<Context> = async ctx => {
-	const message = ctx.message?.reply_to_message
-	const quote = ctx.message?.text.split(/\s+/g).slice(1).join(' ')
-
-	if (!message || !quote) {
-		return
-	}
-
 	try {
-		const audio = new Audio()
+		const message = ctx.message?.reply_to_message
+		const quote = ctx.message?.text.split(/\s+/g).slice(1).join(' ')
+		if (!message || !quote) {
+			return
+		}
 
-		audio.quote = quote
-		audio.words = quote
-			.toLowerCase()
-			.replace(/[,./?!@#%^&*;:\-=+\\|"`~()[\]{}\u2013]/g, '')
-			.split(/\s+/g)
-			.map(word => Word.create({ word }))
+		let fileId: string
+		let fileUid: string
 
 		if ('voice' in message) {
-			audio.fileId = message.voice.file_id
-			audio.fileUid = message.voice.file_unique_id
+			fileId = message.voice.file_id
+			fileUid = message.voice.file_unique_id
 		}
 		else if ('audio' in message) {
 			await ctx.replyWithChatAction('record_audio')
@@ -48,18 +41,25 @@ export const add: Middleware<Context> = async ctx => {
 			const tempMessage = await ctx.replyWithVoice({
 				source: path.resolve(__dirname, '../../temp.ogg'), filename: 'message.ogg'
 			})
-			audio.fileId = tempMessage.voice.file_id
-			audio.fileUid = tempMessage.voice.file_unique_id
+			fileId = tempMessage.voice.file_id
+			fileUid = tempMessage.voice.file_unique_id
+
 			fs.unlinkSync(path.resolve(__dirname, '../../temp.ogg'))
 		}
+		else {
+			return
+		}
 
-		await audio.save()
+		const audio = await addAudio(fileId, fileUid, quote)
+		if (audio == null) {
+			await ctx.reply(ctx.t.commands.add.res.already_added, Extra.HTML())
+			return
+		}
 
 		await ctx.reply(ctx.t.commands.add.res.ok, Extra
 			.HTML()
 			.markup(markups.removeAfterAdd(ctx, { fileUid: audio.fileUid }))
 		)
-
 		logger.info(`added ${audio.fileUid}`, 'command.add')
 	}
 	catch (err) {

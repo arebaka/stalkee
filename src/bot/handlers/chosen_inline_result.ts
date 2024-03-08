@@ -2,16 +2,14 @@ import { Middleware } from 'telegraf'
 
 import { Context } from '../../types'
 import { logger } from '../../utils'
-import { Audio } from '../../models'
+import { useAudio } from '../../controllers'
 
 export const chosenInlineResult: Middleware<Context> = async ctx => {
 	try {
-		const audio = await Audio.findOneByOrFail({
-			fileUid: ctx.chosenInlineResult?.result_id.split('.')[0]
-		})
-
-		audio.nUses++
-		await audio.save()
+		const fileUid = ctx.chosenInlineResult?.result_id.split('.')[0]
+		if (fileUid != null) {
+			await useAudio(fileUid)
+		}
 	}
 	catch (err) {
 		logger.error(err as string, 'handler.chosen_inline_result')

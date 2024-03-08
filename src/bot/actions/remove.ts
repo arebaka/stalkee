@@ -2,7 +2,7 @@ import { Middleware } from 'telegraf'
 
 import { Context } from '../../types'
 import { logger } from '../../utils'
-import { Audio } from '../../models'
+import { removeAudio } from '../../controllers'
 
 export const remove: Middleware<Context> = async ctx => {
 	const fileUid = ctx.match && ctx.match[1]
@@ -11,7 +11,7 @@ export const remove: Middleware<Context> = async ctx => {
 	}
 
 	try {
-		await Audio.delete({ fileUid: fileUid })
+		await removeAudio(fileUid)
 		await ctx.editMessageText(ctx.t.actions.remove.res.ok)
 	}
 	catch (err) {
