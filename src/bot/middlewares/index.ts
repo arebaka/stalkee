@@ -1,2 +1,2 @@
-export * from './update_user'
+export * from './update'
 export * from './set_locale'
