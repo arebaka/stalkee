@@ -3,7 +3,7 @@ import { DataSource, Logger } from 'typeorm'
 import { Bot } from './bot'
 import { config, logger } from './utils'
 import { DBLogger } from './database/logger'
-import { User, Audio, Word } from './models'
+import { User, Audio, Word, ActorAlias, LocationAlias } from './models'
 
 export class App {
 
@@ -20,7 +20,7 @@ export class App {
 			url: config.db.uri,
 			synchronize: true,
 			logger: this.dbLogger,
-			entities: [User, Audio, Word]
+			entities: [User, Audio, Word, ActorAlias, LocationAlias]
 		})
 	}
 

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { Context } from '../../types'
 import { config, logger } from '../../utils'
-import { Audio } from '../../models'
+import { Audio, ActorAlias, LocationAlias } from '../../models'
 
 function audioToQueryResult(audio: Audio): InlineQueryResultCachedDocument {
 	return {
@@ -39,31 +39,41 @@ export const inlineQuery: Middleware<Context> = async ctx => {
 			})
 		}
 		else if (query.length > 1 && (query.startsWith('@') || query.startsWith('~'))) {
-			let actor, location, first, second
-			const secondMarker = query[0] == '@' ? '~' : '@'
-			first = query.slice(1)
+			let actor: string
+			let location: string
+			let first = query.slice(1)
+			let second = ''
 
+			const secondMarker = query[0] == '@' ? '~' : '@'
 			const secondMarkerIndex = first.indexOf(secondMarker)
+
 			if (secondMarkerIndex > -1) {
 				second = first.slice(secondMarkerIndex + 1).trim()
 				first = first.slice(0, secondMarkerIndex).trim()
 			}
 
-			if (secondMarker == '@') {
-				actor = second
-				location = first
-			} else {
-				actor = first
-				location = second
+			[actor, location] = secondMarker == '@' ? [second, first] : [first, second]
+			actor = actor.toLowerCase()
+			location = location.toLowerCase()
+
+			if (actor) {
+				const actorEntity = await ActorAlias.findOneBy({
+					alias: actor
+				})
+				actor = actorEntity?.actor || ''
 			}
-			actor = actor || undefined
-			location = location || undefined
+			if (location) {
+				const locationEntity = await LocationAlias.findOneBy({
+					alias: location
+				})
+				location = locationEntity?.location || ''
+			}
 
 			audios = await Audio.find({
 				...options,
 				where: {
-					actor: actor,
-					location: location,
+					actor: actor || undefined,
+					location: location || undefined,
 				}
 			})
 		}
