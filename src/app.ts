@@ -30,7 +30,6 @@ export class App {
 			logger.info('connected to database.', 'process.start')
 
 			await this.bot.start(config.bot.options)
-			await this.bot.setMode('regular')
 			const botInfo = await this.bot.getMe()
 			this.username = botInfo.username as string
 

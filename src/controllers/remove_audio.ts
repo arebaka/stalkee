@@ -1,11 +1,13 @@
 import { logger } from '../utils'
 import { Audio } from '../models'
 
-export const removeAudio = async (fileUid: string) => {
+export const removeAudio = async (fileUid: string): Promise<boolean> => {
 	try {
-		await Audio.delete({ fileUid: fileUid })
+		const res = await Audio.delete({ fileUid: fileUid })
+		return !!res.affected
 	}
 	catch (err) {
 		logger.error(''+err, 'controller.remove_audio')
+		return false
 	}
 }
