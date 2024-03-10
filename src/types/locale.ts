@@ -1,6 +1,7 @@
 type Dict = {[key: string]: string}
 
 interface Command {
+	descr: string
 	res: Dict
 }
 
@@ -18,6 +19,7 @@ interface Action {
 
 export interface Locale {
 	language: string
+	iso_639_1_code: string
 	name: string
 	common: {
 		res: Dict & {

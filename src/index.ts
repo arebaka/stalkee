@@ -13,7 +13,7 @@ rl.on('line', input => {
 	switch (command) {
 		case 'stop': app.stop(); break
 		case 'reload': app.reload(); break
-		case 'mode': app.setMode(args[0]); break;
+		case 'mode': app.setMode(args[0]); break
 	}
 })
 

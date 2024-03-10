@@ -25,7 +25,7 @@ export const add: Middleware<Context> = async ctx => {
 			fileUid = message.voice.file_unique_id
 		}
 		else if ('audio' in message) {
-			await ctx.replyWithChatAction('record_audio')
+			await ctx.replyWithChatAction('record_voice')
 
 			const fileLink = await ctx.telegram.getFileLink(message.audio.file_id)
 			const stream: fs.ReadStream = await axios(fileLink, { responseType: 'stream' }).then(res => res.data)

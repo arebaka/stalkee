@@ -1,7 +1,7 @@
 import { Telegraf } from 'telegraf'
 import typegram from 'typegram'
 
-import { logger } from '../utils'
+import { config, i18n, logger } from '../utils'
 import { LaunchOptions, Context } from '../types'
 
 import * as middlewares from './middlewares'
@@ -12,32 +12,26 @@ import * as actions from './actions'
 
 
 
-type CommandMap = {[mode: string]: {[cmd: string]: string}}
+type CommandsCategory = 'regular'|'admin'
+type AllowedCommand = 'start'|'info'|'add'|'remove'|'quote'|'actor'|'location'
 
 export class Bot {
 
-	public static readonly commands: CommandMap = {
-		regular: {
-			start: 'завести шарманку',
-			info: 'сейчас я попробую настроить прототип',
-		},
-		admin: {
-			add: 'админа заманало каждый раз вводить',
-			remove: 'админа заманало каждый раз вводить',
-			quote: 'админа заманало каждый раз вводить',
-			actor: 'админа заманало каждый раз вводить',
-			location: 'админа заманало каждый раз вводить',
-		},
-	}
-
-	public static readonly modeCommands: CommandMap = {
-		regular: Bot.commands.regular,
-		edit: {...Bot.commands.regular, ...Bot.commands.admin},
+	public static readonly commands: {[category: string]: AllowedCommand[]} = {
+		regular: ['start', 'info'],
+		admin: ['start', 'info', 'add', 'remove', 'quote', 'actor', 'location'],
 	}
 
 	private bot: Telegraf<Context>
 	private options: LaunchOptions = {}
 	private botInfo: typegram.User
+
+	private static _buildCommands(category: CommandsCategory, locale: string) {
+		return Bot.commands[category].map(command => ({
+			command: command,
+			description: i18n[locale].commands[command].descr
+		}))
+	}
 
 	constructor(token: string) {
 		this.bot = new Telegraf<Context>(token)
@@ -73,6 +67,7 @@ export class Bot {
 		await this.bot.launch(options)
 		this.options = options
 		this.botInfo = await this.bot.telegram.getMe()
+		await this.setMyCommands()
 	}
 
 	async stop(): Promise<void> {
@@ -84,16 +79,27 @@ export class Bot {
 		await this.start(this.options)
 	}
 
+	/**
+	 * @deprecated with Bot API 6
+	 */
 	async setMode(mode: string): Promise<void> {
-		if (!Bot.modeCommands[mode]) {
-			throw new Error(`No mode named ${mode}`)
+		logger.warn('Setting mode is deprecated!', 'bot.set_mode')
+	}
+
+	async setMyCommands() {
+		await this.bot.telegram.setMyCommands(
+			Bot._buildCommands('regular', config.bot.default_locale))
+		for (const locale of config.bot.locales) {
+			await this.bot.telegram.setMyCommands(
+				Bot._buildCommands('regular', locale), {
+					language_code: i18n[locale].iso_639_1_code
+			})
 		}
 
-		const preparedCommands = Bot.modeCommands[mode]
-
-		await this.bot.telegram.setMyCommands(
-			Object.entries(preparedCommands)
-				.map(([command, description]) => ({ command, description }))
-		)
+		const adminCommands = Bot._buildCommands('admin', config.bot.default_locale)
+		for (const userId of config.bot.admins) {
+			await this.bot.telegram.setMyCommands(
+				adminCommands, { scope: { type: 'chat', chat_id: userId } })
+		}
 	}
 }

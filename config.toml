@@ -3,6 +3,7 @@ token   = ""
 admins  = []
 options = {}
 locales = ["eng", "rus"]
+default_locale = "eng"
 
 [db]
 uri = "postgres://localhost/stalkee"

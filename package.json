@@ -1,6 +1,6 @@
 {
   "name": "stalkee",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "description": "a Telegram bot who can send voice messages via inline mode added by admin with sorting them by numbers of uses",
   "license": "MIT",
   "author": "arelive <me@are.moe> (https://are.moe)",
@@ -38,7 +38,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
-    "telegraf": "^3.39.0",
+    "telegraf": "^3.40.0",
     "toml": "^3.0.0",
     "typegram": "^3.9.1",
     "typeorm": "^0.3.6",

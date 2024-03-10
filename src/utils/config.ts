@@ -10,6 +10,7 @@ interface IBot {
 	admins: number[]
 	options: LaunchOptions
 	locales: string[]
+	default_locale: string
 }
 
 interface IDB {
@@ -41,5 +42,7 @@ config.bot.admins = process.env.BOT_ADMINS
 config.bot.locales = process.env.BOT_LOCALES
 	? process.env.BOT_LOCALES.split(/\s/g)
 	: config.bot.locales
+
+config.bot.default_locale = process.env.BOT_DEFAULT_LOCALE || config.bot.default_locale || 'eng'
 
 export { config }
